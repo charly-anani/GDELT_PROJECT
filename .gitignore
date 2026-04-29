@@ -1,0 +1,21 @@
+# Environment
+.env
+.venv/
+venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Notebook artifacts
+.ipynb_checkpoints/
+
+# Data exports
+*.csv
+*.csv.gz
+*.tsv
+
+data/raw/
+
+# OS files
+.DS_Store
