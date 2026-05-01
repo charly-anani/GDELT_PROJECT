@@ -1,0 +1,25 @@
+{
+  "best_model": "GradientBoosting",
+  "f1_macro_test": 0.5449,
+  "cv_f1_macro_mean": 0.5352,
+  "cv_f1_macro_std": 0.0021,
+  "n_clusters": 3,
+  "silhouette_score": 0.527,
+  "features": [
+    "GoldsteinScale",
+    "QuadClass",
+    "NumMentions",
+    "NumSources",
+    "NumArticles",
+    "_month",
+    "_dow",
+    "_is_conflict",
+    "cluster"
+  ],
+  "cluster_names": {
+    "0": "Diplomatie & accords",
+    "1": "Tensions & conflits",
+    "2": "Couverture institutionnelle",
+    "3": "Faits divers locaux"
+  }
+}
