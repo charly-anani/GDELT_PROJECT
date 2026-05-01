@@ -73,7 +73,7 @@ def load_events():
     col_gold  = fc(['goldstein'])
     col_quad  = fc(['quadclass', 'quad_class', 'category'])
     col_lat   = fc(['lat', 'latitude'])
-    col_lon   = fc(['lon', 'long', 'longitude'])
+    col_lon   = fc(['longitude', 'long', 'lon'])
     col_loc   = fc(['location', 'fullname', 'geo_name'])
     col_act1  = fc(['actor1name', 'actor1'])
     col_act2  = fc(['actor2name', 'actor2'])
@@ -99,10 +99,13 @@ def load_events():
 
     if col_tone:
         df[col_tone] = pd.to_numeric(df[col_tone], errors='coerce')
-        df['_sentiment'] = pd.cut(
-            df[col_tone], bins=[-999, -2, 2, 999],
-            labels=['Negatif', 'Neutre', 'Positif']
-        ).astype(str)
+        _tone = df[col_tone]
+        df['_sentiment'] = np.select(
+            [_tone < -2, _tone > 2],
+            ['Negatif', 'Positif'],
+            default='Neutre'
+        )
+        df.loc[_tone.isna(), '_sentiment'] = np.nan
 
     if col_gold:
         df[col_gold] = pd.to_numeric(df[col_gold], errors='coerce')
@@ -275,9 +278,9 @@ with col_c:
     if meta['act1'] or meta['act2']:
         parts = []
         if meta['act1'] and meta['act1'] in dff.columns:
-            parts.append(dff[meta['act1']].dropna())
+            parts.append(dff[meta['act1']].dropna().astype(str))
         if meta['act2'] and meta['act2'] in dff.columns:
-            parts.append(dff[meta['act2']].dropna())
+            parts.append(dff[meta['act2']].dropna().astype(str))
         actors = pd.concat(parts)
         actors = actors[actors.str.strip().str.len() > 2]
         top = actors.value_counts().head(15).reset_index()
@@ -308,8 +311,11 @@ with st.expander("Charger les thèmes GDELT GKG (requête supplémentaire)"):
             gkg = load_gkg()
             col_themes = next((c for c in gkg.columns if 'theme' in c.lower() or 'topic' in c.lower()), None)
             if col_themes:
-                sep = ';' if gkg[col_themes].dropna().iloc[0].count(';') > 0 else ','
-                themes = gkg[col_themes].dropna().str.split(sep).explode().str.strip()
+                _themes_raw = gkg[col_themes].dropna().astype(str)
+                _themes_raw = _themes_raw[_themes_raw.str.strip() != '']
+                _sample = _themes_raw.head(100)
+                sep = ';' if _sample.str.contains(';').sum() > _sample.str.contains(',').sum() else ','
+                themes = _themes_raw.str.split(sep).explode().str.strip()
                 themes = themes[themes.str.len() > 2]
                 top_themes = themes.value_counts().head(20).reset_index()
                 top_themes.columns = ['theme', 'n']
