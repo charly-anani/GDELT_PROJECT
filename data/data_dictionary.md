@@ -10,6 +10,14 @@ Ce document décrit les tables, colonnes et structures de données du projet GDE
 - **Périmètre** : 12 derniers mois
 - **Source** : BigQuery uniquement
 
+### Accès aux données
+
+Les données sont accessibles via Google BigQuery.
+
+**Sur Kaggle** : l'authentification est automatique. Le compte Google propriétaire du projet se lie directement via **Add-ons → Google Cloud Services**.
+
+**En local** : l'authentification repose sur un Service Account JSON généré depuis [console.cloud.google.com](https://console.cloud.google.com). Le compte de service provient de projet `gdelt-494812` → **IAM & Admin → Comptes de service** (rôles : `Lecteur de données BigQuery` + `Utilisateur de job BigQuery`). La clé JSON est obtenue via **Clés → Créer → JSON**. Le fichier est placé à la racine sous `gdelt-494812-54aad2c4e931.json` (exclu git).
+
 ## Tables
 
 La base contient trois tables principales :
