@@ -4,6 +4,8 @@ Analyse des événements médiatisés au Bénin via GDELT v2.0 dans Google BigQu
 
 **Statut** : Work in Progress. Architecture et flux en place ; documentation et contenu détaillé à suivre.
 
+---
+
 ## À propos du projet
 
 - **Données** : GDELT Event Database v2.0 (mise à jour tous les 15 minutes)
@@ -11,13 +13,17 @@ Analyse des événements médiatisés au Bénin via GDELT v2.0 dans Google BigQu
 - **Source unique de vérité** : Google BigQuery (pas de pipeline local d'extraction)
 - **Référence** : GDELT Event Database Data Format Codebook v2.0 (février 2015)
 
+---
+
 ## Contexte BigQuery
 
 - **Projet BigQuery** : `gdelt-494812`
 - **Dataset** : `benin_2025`
-- **Tables** : `events`, `eventmentions`, `gkg`
+- **Tables** : `events_clean`, `mentions_clean`, `gkg_clean`
 - Documentation BigQuery : [config/bigquery.md](config/bigquery.md)
 - Dictionnaire de données : [data/data_dictionary.md](data/data_dictionary.md)
+
+---
 
 ## Architecture
 
@@ -43,34 +49,83 @@ GDELT Project/
     └── 06_clean_enrich_gkg.sql
 ```
 
+---
+
 ## Flux de traitement
 
 1. **Extraction** (`01_extract_*.sql`) : données brutes depuis BigQuery
 2. **Nettoyage & Enrichissement** (`04_clean_enrich_*.sql`) : transformation in-place BigQuery
-3. **Exploration** (`notebooks/`) : analyse analytique interactif
+3. **Exploration** (`notebooks/`) : analyse analytique interactive
 4. **Visualisation** (`dashboard/`) : interface utilisateur
 5. **Documentation** (`data/data_dictionary.md`) : référence colonnes et taxonomies
 
+---
+
 ## Authentification BigQuery
 
-Les données sont stockées dans BigQuery projet `gdelt-494812`, dataset `benin_2025`.
+L’accès BigQuery est accordé uniquement aux comptes Google autorisés au préalable.
 
-**Sur Kaggle** : l'authentification est automatique dès lors que le compte Google propriétaire du projet est lié via **Add-ons → Google Cloud Services**. Le notebook s'exécute directement avec **Run All**.
+Pour permettre l’exécution locale du notebook, les accès suivants doivent être attribués sur l’adresse e-mail Google de l’évaluateur :
 
-**En local** (VSCode / Jupyter) : l'authentification repose sur un Service Account JSON obtenu via [console.cloud.google.com](https://console.cloud.google.com) :
-- Accès au projet `gdelt-494812` → **IAM & Admin → Comptes de service**
-- Création d'un compte avec rôles : `Lecteur de données BigQuery` + `Utilisateur de job BigQuery`
-- Génération d'une clé JSON (**Clés → Créer → JSON**)
-- Le fichier téléchargé est déposé à la racine sous `gdelt-494812-54aad2c4e931.json` (exclu git via `.gitignore`)
+- Au niveau du **projet** `gdelt-494812` : rôle `Utilisateur de job BigQuery` (`BigQuery Job User`) pour permettre l’exécution des requêtes.  
+- Au niveau du **dataset** `benin_2025` : rôle `Lecteur de données BigQuery` (`BigQuery Data Viewer`) pour permettre la lecture des tables. 
 
-Les requêtes exécutées dans les notebooks pointent directement vers l'ensemble de données nettoyé et enrichi dans BigQuery.
+
+Concrètement, pour qu’un évaluateur puisse exécuter le notebook, son compte Google doit obligatoirement faire partie de la liste d’e‑mails autorisés ci‑dessous.
+
+### Liste des e-mails autorisés
+
+- [email 1]
+- [email 2]
+- [email 3]
+
+### Sur Kaggle
+
+1. **Add-ons → Google Cloud Services** → lier son compte Google
+2. Activer **BigQuery**
+3. **Run All** — aucune configuration supplémentaire, sous réserve que le compte utilisé fasse partie des e-mails autorisés
+
+### En local (VSCode / Jupyter)
+
+Prérequis : avoir [gcloud CLI](https://cloud.google.com/sdk/docs/install) installé. [web:666]
+
+**Windows** : télécharger et exécuter l’installeur  
+[GoogleCloudSDKInstaller.exe](https://dl.google.com/dl/cloudsdk/channels/rapid/GoogleCloudSDKInstaller.exe)  
+— suivre les étapes de l’installeur, il configure tout automatiquement.
+
+**macOS :**
+```bash
+brew install --cask google-cloud-sdk
+```
+
+**Linux (Debian/Ubuntu) :**
+```bash
+sudo apt-get install google-cloud-cli
+```
+
+Ensuite :
+
+```bash
+# 1. Installer les dépendances
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+
+# 2. S'authentifier avec son compte Google (à faire une seule fois)
+gcloud auth application-default login
+
+# 3. Exécuter le notebook depuis la racine du projet
+jupyter notebook notebooks/exploration.ipynb
+```
+
+L’étape `gcloud auth application-default login` ouvre le navigateur pour une connexion Google standard et crée les credentials locaux utilisés automatiquement par les bibliothèques BigQuery. [web:664][web:666][web:673]
+
+---
 
 ## Installation
 
 ```bash
 python -m venv .venv
 source .venv/bin/activate
-pip install -r requirements.txt 
+pip install -r requirements.txt
 ```
-
-
