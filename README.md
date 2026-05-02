@@ -45,14 +45,32 @@ GDELT Project/
 
 ## Flux de traitement
 
+1. **Extraction** (`01_extract_*.sql`) : données brutes depuis BigQuery
+2. **Nettoyage & Enrichissement** (`04_clean_enrich_*.sql`) : transformation in-place BigQuery
+3. **Exploration** (`notebooks/`) : analyse analytique interactif
+4. **Visualisation** (`dashboard/`) : interface utilisateur
+5. **Documentation** (`data/data_dictionary.md`) : référence colonnes et taxonomies
 
+## Authentification BigQuery
+
+Les données sont stockées dans BigQuery projet `gdelt-494812`, dataset `benin_2025`.
+
+**Sur Kaggle** : l'authentification est automatique dès lors que le compte Google propriétaire du projet est lié via **Add-ons → Google Cloud Services**. Le notebook s'exécute directement avec **Run All**.
+
+**En local** (VSCode / Jupyter) : l'authentification repose sur un Service Account JSON obtenu via [console.cloud.google.com](https://console.cloud.google.com) :
+- Accès au projet `gdelt-494812` → **IAM & Admin → Comptes de service**
+- Création d'un compte avec rôles : `Lecteur de données BigQuery` + `Utilisateur de job BigQuery`
+- Génération d'une clé JSON (**Clés → Créer → JSON**)
+- Le fichier téléchargé est déposé à la racine sous `gdelt-494812-54aad2c4e931.json` (exclu git via `.gitignore`)
+
+Les requêtes exécutées dans les notebooks pointent directement vers l'ensemble de données nettoyé et enrichi dans BigQuery.
 
 ## Installation
 
 ```bash
 python -m venv .venv
 source .venv/bin/activate
-pip install -r requirements.txt
+pip install -r requirements.txt 
 ```
 
 
