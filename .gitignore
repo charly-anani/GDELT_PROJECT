@@ -19,3 +19,6 @@ data/raw/
 
 # OS files
 .DS_Store
+
+models/*.pkl
+models/*.joblib

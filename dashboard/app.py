@@ -58,6 +58,10 @@ def bq(sql):
 # ─── Chargement des données ───────────────────────────────────────────────────
 @st.cache_data(ttl=3600)
 def load_events():
+    # BigQuery contient uniquement des données 2025 (filtrées à la source).
+    # Le filtre Python ci-dessous est un garde-fou : pd.to_datetime peut
+    # produire des dates aberrantes sur des valeurs malformées (epoch 1970,
+    # NaT mal converti, etc.). Il ne coûte rien et évite les surprises.
     df = bq(f"SELECT * FROM `{PROJECT}.{DATASET}.events_clean` LIMIT 100000")
 
     # Détecter colonnes automatiquement
@@ -87,7 +91,12 @@ def load_events():
 
     # Préparer colonnes de travail
     if col_date:
-        df['_date']  = pd.to_datetime(df[col_date].astype(str), errors='coerce')
+        df['_date'] = pd.to_datetime(df[col_date].astype(str), errors='coerce')
+
+        # Garde-fou : exclure toute date hors 2025 résultant d'une conversion
+        # erronée (valeur malformée, epoch 1970, etc.)
+        df = df[df['_date'].dt.year == 2025]
+
         df['_month'] = df['_date'].dt.to_period('M').astype(str)
         df['_week']  = df['_date'].dt.to_period('W').astype(str)
 

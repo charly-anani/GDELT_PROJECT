@@ -1,8 +1,8 @@
 {
   "best_model": "GradientBoosting",
-  "f1_macro_test": 0.5449,
+  "f1_macro_test": 0.5428,
   "cv_f1_macro_mean": 0.5352,
-  "cv_f1_macro_std": 0.0021,
+  "cv_f1_macro_std": 0.004,
   "n_clusters": 3,
   "silhouette_score": 0.527,
   "features": [
@@ -17,9 +17,9 @@
     "cluster"
   ],
   "cluster_names": {
-    "0": "Diplomatie & accords",
-    "1": "Tensions & conflits",
-    "2": "Couverture institutionnelle",
-    "3": "Faits divers locaux"
+    "0": "Coopération verbale",
+    "1": "Coopération matérielle",
+    "2": "Conflit verbal",
+    "3": "Conflit matériel"
   }
 }
