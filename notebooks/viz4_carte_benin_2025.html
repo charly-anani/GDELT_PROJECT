@@ -1,0 +1,3820 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_6935a9ea5eb75ada61d8bc3b668a03fb {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdn.jsdelivr.net/gh/python-visualization/folium@main/folium/templates/leaflet_heat.min.js"></script>
+</head>
+<body>
+    
+    
+<div style="
+    position:fixed; bottom:30px; left:30px; z-index:9999;
+    background:rgba(255,255,255,0.97); color:#1f2937;
+    padding:14px 18px; border-radius:12px;
+    font-family:Inter,sans-serif; font-size:13px;
+    border:1px solid #e5e7eb; box-shadow:0 4px 20px rgba(0,0,0,0.15);
+    max-width:280px;
+">
+    <b style="font-size:14px;display:block;margin-bottom:8px;">
+        Bénin · Événements 2025
+    </b>
+
+    <span style="color:#F5A800;font-size:18px;">●</span>&nbsp;Coopération<br>
+    <span style="color:#E45756;font-size:18px;">●</span>&nbsp;Conflit<br>
+
+    <div style="margin-top:8px;padding-top:8px;border-top:1px solid #e5e7eb;
+                color:#6b7280;font-size:11px;line-height:1.5;">
+        Taille du cercle = volume d'événements<br>
+        Zone colorée = densité (heatmap)<br>
+        Cliquer sur un point pour les détails
+    </div>
+
+    <div style="margin-top:10px;padding-top:10px;border-top:1px solid #e5e7eb;">
+        <b style="font-size:11px;color:#374151;">Répartition par zone géographique</b>
+        <table style="width:100%;margin-top:6px;border-collapse:collapse;">
+            <thead>
+                <tr style="background:#f9fafb;">
+                    <th style="padding:4px 6px;font-size:10px;text-align:left;color:#6b7280;">Région</th>
+                    <th style="padding:4px 6px;font-size:10px;text-align:center;color:#6b7280;">Évts</th>
+                    <th style="padding:4px 6px;font-size:10px;text-align:center;color:#E45756;">🔴 Conf.</th>
+                    <th style="padding:4px 6px;font-size:10px;text-align:center;color:#F5A800;">🟡 Coop.</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+        <tr>
+            <td style="padding:4px 6px;font-size:11px;font-weight:600;">Nord (>9°N)</td>
+            <td style="padding:4px 6px;font-size:11px;text-align:center;">894</td>
+            <td style="padding:4px 6px;font-size:11px;text-align:center;color:#E45756;font-weight:700;">43.4%</td>
+            <td style="padding:4px 6px;font-size:11px;text-align:center;color:#F5A800;font-weight:700;">56.6%</td>
+        </tr>
+        <tr>
+            <td style="padding:4px 6px;font-size:11px;font-weight:600;">Centre (7–9°N)</td>
+            <td style="padding:4px 6px;font-size:11px;text-align:center;">471</td>
+            <td style="padding:4px 6px;font-size:11px;text-align:center;color:#ff6b35;font-weight:700;">20.4%</td>
+            <td style="padding:4px 6px;font-size:11px;text-align:center;color:#F5A800;font-weight:700;">79.6%</td>
+        </tr>
+        <tr>
+            <td style="padding:4px 6px;font-size:11px;font-weight:600;">Sud (<7°N)</td>
+            <td style="padding:4px 6px;font-size:11px;text-align:center;">736</td>
+            <td style="padding:4px 6px;font-size:11px;text-align:center;color:#F5A800;font-weight:700;">13.5%</td>
+            <td style="padding:4px 6px;font-size:11px;text-align:center;color:#F5A800;font-weight:700;">86.5%</td>
+        </tr>
+        <tr style="background:#f9fafb;border-top:1px dashed #d1d5db;">
+            <td style="padding:4px 6px;font-size:11px;font-style:italic;color:#6b7280;">Bénin générique ⚠️</td>
+            <td style="padding:4px 6px;font-size:11px;text-align:center;color:#6b7280;">21758</td>
+            <td style="padding:4px 6px;font-size:11px;text-align:center;color:#9ca3af;">26.1%</td>
+            <td style="padding:4px 6px;font-size:11px;text-align:center;color:#9ca3af;">73.9%</td>
+        </tr>
+            </tbody>
+        </table>
+        <div style="margin-top:5px;font-size:9px;color:#9ca3af;font-style:italic;">
+            ⚠️ Bénin générique = articles sans ville précise,<br>
+            géolocalisés au centroïde national (9.5°N, 2.25°E)
+        </div>
+    </div>
+</div>
+    
+            <div class="folium-map" id="map_6935a9ea5eb75ada61d8bc3b668a03fb" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_6935a9ea5eb75ada61d8bc3b668a03fb = L.map(
+                "map_6935a9ea5eb75ada61d8bc3b668a03fb",
+                {
+                    center: [9.3, 2.3],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 8,
+  "zoomControl": true,
+  "preferCanvas": true,
+  "scrollWheelZoom": true,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_94768ec1f19cd42096d6312bffb27976 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_94768ec1f19cd42096d6312bffb27976.addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+            var heat_map_f4c8dd55e2981339afe546038351e9c9 = L.heatLayer(
+                [[9.5, 2.25, 21758], [6.36307, 2.08506, 218], [6.48333, 2.61667, 196], [7.18286, 1.99119, 155], [9.33716, 2.63031, 110], [11.3333, 2.91667, 109], [11.1342, 2.93861, 101], [8.88649, 2.59752, 92], [11.048, 0.968912, 80], [12.0691, 3.18405, 61], [11.8685, 3.38989, 53], [6.63869, 1.71674, 50], [7.08333, 1.83333, 45], [10.6212, 1.26651, 35], [6.46441, 2.39288, 33], [7.92807, 1.97558, 31], [11.2029, 3.0266, 31], [6.66547, 2.15138, 30], [10.8945, 1.16328, 28], [10.3042, 1.37962, 28], [6.98007, 2.6649, 25], [10.2927, 3.38367, 24], [6.91667, 1.91667, 24], [7.10105, 1.96827, 23], [9.8636, 2.72094, 23], [9.70853, 1.66598, 21], [7.36332, 2.59978, 20], [7.81667, 1.76667, 20], [9.75, 2.75, 18], [6.38948, 2.34581, 18], [9.66167, 1.38472, 17], [7.01717, 2.45608, 17], [10.8145, 1.43101, 17], [6.5874, 1.96539, 16], [7.34436, 1.93447, 16], [10.75, 1.66667, 16], [6.61738, 2.35776, 15], [6.35, 2.4, 14], [7.97252, 2.22176, 12], [6.50299, 2.36791, 10], [6.4, 2.66667, 10], [6.66667, 2.25, 10], [6.36536, 2.41833, 9], [11.7765, 3.21176, 8], [6.38948, 2.28527, 8], [10.75, 1.66667, 8], [7.36332, 2.59978, 8], [9.70906, 1.95035, 7], [9.28773, 2.78112, 7], [9.55462, 2.62778, 7], [8.5837, 1.69022, 7], [10.5395, 0.869667, 7], [9.02682, 2.57878, 6], [9.95457, 3.22136, 6], [6.45072, 1.92162, 6], [9.02839, 2.40438, 6], [6.5847, 2.5499, 5], [8.0, 2.16667, 5], [8.04945, 2.70498, 5], [6.85, 2.08333, 5], [9.43059, 2.64679, 5], [8.53849, 2.43121, 4], [6.8224, 2.47281, 4], [11.0962, 3.31587, 4], [6.82148, 1.63998, 4], [8.06217, 1.97427, 4], [10.5427, 1.2026, 4], [11.242, 2.38771, 4], [12.0804, 3.17956, 4], [10.1841, 1.09662, 4], [7.75, 2.18333, 4], [6.7, 2.75, 4], [7.82414, 1.32319, 3], [10.1895, 2.93085, 3], [6.39209, 2.53725, 3], [9.2179, 2.56571, 3], [12.4074, 2.825, 3], [11.2984, 2.43856, 2], [6.34555, 2.20338, 2], [6.83333, 2.0, 2], [6.5808, 1.6696, 2], [10.195, 2.12999, 2], [6.38774, 2.21423, 2], [10.2283, 2.66335, 2], [10.9242, 3.47184, 2], [6.55, 2.33333, 2], [6.64873, 2.73417, 2], [11.894, 2.93418, 2], [10.4482, 2.45031, 2], [6.33333, 1.85, 1], [11.1734, 2.4085, 1], [6.29386, 1.89178, 1], [10.2175, 3.13065, 1], [10.5416, 2.72824, 1], [10.1966, 1.5994, 1], [9.80481, 2.43961, 1], [10.7839, 2.71315, 1], [9.73606, 2.64774, 1], [6.28036, 1.82251, 1], [9.78492, 2.63669, 1], [10.2275, 2.00192, 1], [6.91667, 1.8, 1], [10.9282, 3.69429, 1], [6.52686, 1.8233, 1], [6.73618, 2.65866, 1], [9.09416, 2.8869, 1], [9.12273, 2.56099, 1], [10.3496, 2.37906, 1], [9.58174, 1.43861, 1], [6.88935, 1.83722, 1]],
+                {
+  "minOpacity": 0.3,
+  "maxZoom": 10,
+  "radius": 18,
+  "blur": 15,
+  "gradient": {
+  "0.3": "#F5A800",
+  "0.6": "#ff6b35",
+  "1.0": "#E45756",
+},
+}
+            );
+        
+    
+            heat_map_f4c8dd55e2981339afe546038351e9c9.addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+            var circle_marker_cc53bd339599af8a5411dce9a2c3f8a6 = L.circleMarker(
+                [9.5, 2.25],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 35, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_1023313fa999e7affdca7714e1fe2885 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_db2d0e23aa54424063637daf89b90e4e = $(`<div id="html_db2d0e23aa54424063637daf89b90e4e" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Benin</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>21758</b> événements<br>         📊 Goldstein : <b>-1.48</b>     </div>     </div>`)[0];
+                popup_1023313fa999e7affdca7714e1fe2885.setContent(html_db2d0e23aa54424063637daf89b90e4e);
+            
+        
+
+        circle_marker_cc53bd339599af8a5411dce9a2c3f8a6.bindPopup(popup_1023313fa999e7affdca7714e1fe2885)
+        ;
+
+        
+    
+    
+            circle_marker_cc53bd339599af8a5411dce9a2c3f8a6.bindTooltip(
+                `<div>
+                     📍 Benin  ·  21758 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_611a5980097a612a2d0db648c3f73cce = L.circleMarker(
+                [6.36307, 2.08506],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 35, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_99d8dc34ba21b64bacf75e19157cafbd = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_365569c4f3b61da624890cdb93ced2a2 = $(`<div id="html_365569c4f3b61da624890cdb93ced2a2" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Ouidah</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>218</b> événements<br>         📊 Goldstein : <b>-1.11</b>     </div>     </div>`)[0];
+                popup_99d8dc34ba21b64bacf75e19157cafbd.setContent(html_365569c4f3b61da624890cdb93ced2a2);
+            
+        
+
+        circle_marker_611a5980097a612a2d0db648c3f73cce.bindPopup(popup_99d8dc34ba21b64bacf75e19157cafbd)
+        ;
+
+        
+    
+    
+            circle_marker_611a5980097a612a2d0db648c3f73cce.bindTooltip(
+                `<div>
+                     📍 Ouidah  ·  218 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_43aa7fcaf94db5296284815eab86fff0 = L.circleMarker(
+                [6.48333, 2.61667],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 35, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_db81df7fad2c682e8154d2998be56395 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_56ebf376a1c70e87de2fece937e69cd8 = $(`<div id="html_56ebf376a1c70e87de2fece937e69cd8" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Porto-Novo</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>196</b> événements<br>         📊 Goldstein : <b>-0.81</b>     </div>     </div>`)[0];
+                popup_db81df7fad2c682e8154d2998be56395.setContent(html_56ebf376a1c70e87de2fece937e69cd8);
+            
+        
+
+        circle_marker_43aa7fcaf94db5296284815eab86fff0.bindPopup(popup_db81df7fad2c682e8154d2998be56395)
+        ;
+
+        
+    
+    
+            circle_marker_43aa7fcaf94db5296284815eab86fff0.bindTooltip(
+                `<div>
+                     📍 Porto-Novo  ·  196 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_59dfa759c72c7f920ede808b41419218 = L.circleMarker(
+                [7.18286, 1.99119],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 35, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_3709476f5dc68c807f7cb7546974b7eb = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_1a0d15fa32bdfe286db75b240f6977e5 = $(`<div id="html_1a0d15fa32bdfe286db75b240f6977e5" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Abomey</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>155</b> événements<br>         📊 Goldstein : <b>-1.33</b>     </div>     </div>`)[0];
+                popup_3709476f5dc68c807f7cb7546974b7eb.setContent(html_1a0d15fa32bdfe286db75b240f6977e5);
+            
+        
+
+        circle_marker_59dfa759c72c7f920ede808b41419218.bindPopup(popup_3709476f5dc68c807f7cb7546974b7eb)
+        ;
+
+        
+    
+    
+            circle_marker_59dfa759c72c7f920ede808b41419218.bindTooltip(
+                `<div>
+                     📍 Abomey  ·  155 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_bc32fa49f407e5d697f4f00c4ca3f2b4 = L.circleMarker(
+                [9.33716, 2.63031],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 35, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_bfbec6bddc14061c564263a8979c284a = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_14ee2d42be01d0c341441dbf2167903e = $(`<div id="html_14ee2d42be01d0c341441dbf2167903e" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Parakou</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>110</b> événements<br>         📊 Goldstein : <b>-1.56</b>     </div>     </div>`)[0];
+                popup_bfbec6bddc14061c564263a8979c284a.setContent(html_14ee2d42be01d0c341441dbf2167903e);
+            
+        
+
+        circle_marker_bc32fa49f407e5d697f4f00c4ca3f2b4.bindPopup(popup_bfbec6bddc14061c564263a8979c284a)
+        ;
+
+        
+    
+    
+            circle_marker_bc32fa49f407e5d697f4f00c4ca3f2b4.bindTooltip(
+                `<div>
+                     📍 Parakou  ·  110 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1481c466a3de1a434878cfef3064459d = L.circleMarker(
+                [11.3333, 2.91667],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 35, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_3b87f5ced38c11a85d608b1b0c057bc6 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_5c3d4d8377fa0397a12b8679c5ed11b1 = $(`<div id="html_5c3d4d8377fa0397a12b8679c5ed11b1" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Alibori</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>109</b> événements<br>         📊 Goldstein : <b>-2.02</b>     </div>     </div>`)[0];
+                popup_3b87f5ced38c11a85d608b1b0c057bc6.setContent(html_5c3d4d8377fa0397a12b8679c5ed11b1);
+            
+        
+
+        circle_marker_1481c466a3de1a434878cfef3064459d.bindPopup(popup_3b87f5ced38c11a85d608b1b0c057bc6)
+        ;
+
+        
+    
+    
+            circle_marker_1481c466a3de1a434878cfef3064459d.bindTooltip(
+                `<div>
+                     📍 Alibori  ·  109 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_310f8688df5728e7d7b32e1ccfc98cfc = L.circleMarker(
+                [11.1342, 2.93861],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 35, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_a95cf8e0bf4a7002c6c5a0c5243a1726 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_8eb73dc39070eed97979f1c698f600af = $(`<div id="html_8eb73dc39070eed97979f1c698f600af" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Kandi</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>101</b> événements<br>         📊 Goldstein : <b>-2.13</b>     </div>     </div>`)[0];
+                popup_a95cf8e0bf4a7002c6c5a0c5243a1726.setContent(html_8eb73dc39070eed97979f1c698f600af);
+            
+        
+
+        circle_marker_310f8688df5728e7d7b32e1ccfc98cfc.bindPopup(popup_a95cf8e0bf4a7002c6c5a0c5243a1726)
+        ;
+
+        
+    
+    
+            circle_marker_310f8688df5728e7d7b32e1ccfc98cfc.bindTooltip(
+                `<div>
+                     📍 Kandi  ·  101 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6ac29dc012c6a276a97f9c53567059fe = L.circleMarker(
+                [8.88649, 2.59752],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 35, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_85a579a6dae35df5e9b18d4dcc1b6ea4 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_1b1e9cedde305ed1e13e42523e1706e0 = $(`<div id="html_1b1e9cedde305ed1e13e42523e1706e0" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Tchaourou</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>92</b> événements<br>         📊 Goldstein : <b>-1.45</b>     </div>     </div>`)[0];
+                popup_85a579a6dae35df5e9b18d4dcc1b6ea4.setContent(html_1b1e9cedde305ed1e13e42523e1706e0);
+            
+        
+
+        circle_marker_6ac29dc012c6a276a97f9c53567059fe.bindPopup(popup_85a579a6dae35df5e9b18d4dcc1b6ea4)
+        ;
+
+        
+    
+    
+            circle_marker_6ac29dc012c6a276a97f9c53567059fe.bindTooltip(
+                `<div>
+                     📍 Tchaourou  ·  92 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_44574934a5697886f777c2c67259ecd4 = L.circleMarker(
+                [11.048, 0.968912],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 35, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_04112225875ddbd3f8c9551b9d741550 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_744b1f807df5ff9a3ce5aa1d6f2e70da = $(`<div id="html_744b1f807df5ff9a3ce5aa1d6f2e70da" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Porga</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>80</b> événements<br>         📊 Goldstein : <b>-2.19</b>     </div>     </div>`)[0];
+                popup_04112225875ddbd3f8c9551b9d741550.setContent(html_744b1f807df5ff9a3ce5aa1d6f2e70da);
+            
+        
+
+        circle_marker_44574934a5697886f777c2c67259ecd4.bindPopup(popup_04112225875ddbd3f8c9551b9d741550)
+        ;
+
+        
+    
+    
+            circle_marker_44574934a5697886f777c2c67259ecd4.bindTooltip(
+                `<div>
+                     📍 Porga  ·  80 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ef3fe4d3f10ed80c4c434410bd16882b = L.circleMarker(
+                [12.0691, 3.18405],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 30.5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_c1f36f575be251ecc4f7a1770ea478bf = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_9b379953ffd7fcd9031459d938809a8d = $(`<div id="html_9b379953ffd7fcd9031459d938809a8d" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Karimama</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>61</b> événements<br>         📊 Goldstein : <b>-2.54</b>     </div>     </div>`)[0];
+                popup_c1f36f575be251ecc4f7a1770ea478bf.setContent(html_9b379953ffd7fcd9031459d938809a8d);
+            
+        
+
+        circle_marker_ef3fe4d3f10ed80c4c434410bd16882b.bindPopup(popup_c1f36f575be251ecc4f7a1770ea478bf)
+        ;
+
+        
+    
+    
+            circle_marker_ef3fe4d3f10ed80c4c434410bd16882b.bindTooltip(
+                `<div>
+                     📍 Karimama  ·  61 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_89e9e7d5ffc249708e49b5a0a79721c1 = L.circleMarker(
+                [11.8685, 3.38989],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 26.5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_7ebe7030dcc87193c758a4a18b99b179 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_65f433cffd7ae12cf80589815a31af5e = $(`<div id="html_65f433cffd7ae12cf80589815a31af5e" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Malanville</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>53</b> événements<br>         📊 Goldstein : <b>-1.43</b>     </div>     </div>`)[0];
+                popup_7ebe7030dcc87193c758a4a18b99b179.setContent(html_65f433cffd7ae12cf80589815a31af5e);
+            
+        
+
+        circle_marker_89e9e7d5ffc249708e49b5a0a79721c1.bindPopup(popup_7ebe7030dcc87193c758a4a18b99b179)
+        ;
+
+        
+    
+    
+            circle_marker_89e9e7d5ffc249708e49b5a0a79721c1.bindTooltip(
+                `<div>
+                     📍 Malanville  ·  53 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_104cbceed01649ca2f83a12d4e0fdc25 = L.circleMarker(
+                [6.63869, 1.71674],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 25.0, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_c154f0731f90d93cf8fb4ef2fd83b0e4 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_45fecfa1e2b84a64cbb9b2aab35eb6fa = $(`<div id="html_45fecfa1e2b84a64cbb9b2aab35eb6fa" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Lokossa</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>50</b> événements<br>         📊 Goldstein : <b>-1.35</b>     </div>     </div>`)[0];
+                popup_c154f0731f90d93cf8fb4ef2fd83b0e4.setContent(html_45fecfa1e2b84a64cbb9b2aab35eb6fa);
+            
+        
+
+        circle_marker_104cbceed01649ca2f83a12d4e0fdc25.bindPopup(popup_c154f0731f90d93cf8fb4ef2fd83b0e4)
+        ;
+
+        
+    
+    
+            circle_marker_104cbceed01649ca2f83a12d4e0fdc25.bindTooltip(
+                `<div>
+                     📍 Lokossa  ·  50 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_464577fd763731c2579573a6e1f001b8 = L.circleMarker(
+                [7.08333, 1.83333],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 22.5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_0a19e8692c29ab64577ad843346bafa4 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_a61c53d3241148d465946de829824192 = $(`<div id="html_a61c53d3241148d465946de829824192" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Couffo</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>45</b> événements<br>         📊 Goldstein : <b>0.03</b>     </div>     </div>`)[0];
+                popup_0a19e8692c29ab64577ad843346bafa4.setContent(html_a61c53d3241148d465946de829824192);
+            
+        
+
+        circle_marker_464577fd763731c2579573a6e1f001b8.bindPopup(popup_0a19e8692c29ab64577ad843346bafa4)
+        ;
+
+        
+    
+    
+            circle_marker_464577fd763731c2579573a6e1f001b8.bindTooltip(
+                `<div>
+                     📍 Couffo  ·  45 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2ee6126cae227c6e817c2624737d5ad7 = L.circleMarker(
+                [10.6212, 1.26651],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_56a7d381deb5d741304113d18d36f9b8 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_d2bd54b2ff2e3f9191f4304f151c2e6c = $(`<div id="html_d2bd54b2ff2e3f9191f4304f151c2e6c" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Tanguieta</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>35</b> événements<br>         📊 Goldstein : <b>-1.55</b>     </div>     </div>`)[0];
+                popup_56a7d381deb5d741304113d18d36f9b8.setContent(html_d2bd54b2ff2e3f9191f4304f151c2e6c);
+            
+        
+
+        circle_marker_2ee6126cae227c6e817c2624737d5ad7.bindPopup(popup_56a7d381deb5d741304113d18d36f9b8)
+        ;
+
+        
+    
+    
+            circle_marker_2ee6126cae227c6e817c2624737d5ad7.bindTooltip(
+                `<div>
+                     📍 Tanguieta  ·  35 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_45fb4b4a978692b9c39aa608d332783f = L.circleMarker(
+                [6.46441, 2.39288],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 16.5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_fe8095f9e77b7a08b5cb71af2e8a1f58 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_76c80890d3bb54da36b8a4c2f2457581 = $(`<div id="html_76c80890d3bb54da36b8a4c2f2457581" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Ganvie</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>33</b> événements<br>         📊 Goldstein : <b>-2.1</b>     </div>     </div>`)[0];
+                popup_fe8095f9e77b7a08b5cb71af2e8a1f58.setContent(html_76c80890d3bb54da36b8a4c2f2457581);
+            
+        
+
+        circle_marker_45fb4b4a978692b9c39aa608d332783f.bindPopup(popup_fe8095f9e77b7a08b5cb71af2e8a1f58)
+        ;
+
+        
+    
+    
+            circle_marker_45fb4b4a978692b9c39aa608d332783f.bindTooltip(
+                `<div>
+                     📍 Ganvie  ·  33 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_787351fc23e476beb8cc3a9794216a11 = L.circleMarker(
+                [7.92807, 1.97558],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 15.5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_ae8e81c4d739a98cbfa3ee13c52eb556 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_6184408f5dcd9d9d4c5c9d7f3a458e92 = $(`<div id="html_6184408f5dcd9d9d4c5c9d7f3a458e92" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Savalou</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>31</b> événements<br>         📊 Goldstein : <b>-1.4</b>     </div>     </div>`)[0];
+                popup_ae8e81c4d739a98cbfa3ee13c52eb556.setContent(html_6184408f5dcd9d9d4c5c9d7f3a458e92);
+            
+        
+
+        circle_marker_787351fc23e476beb8cc3a9794216a11.bindPopup(popup_ae8e81c4d739a98cbfa3ee13c52eb556)
+        ;
+
+        
+    
+    
+            circle_marker_787351fc23e476beb8cc3a9794216a11.bindTooltip(
+                `<div>
+                     📍 Savalou  ·  31 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_853e84c3b976be2d00f9e9cfb23dc0f4 = L.circleMarker(
+                [11.2029, 3.0266],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 15.5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_c9b3dd5878377740246b37b49bbe6e0a = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_fe0d2e4c0e446e5ac6e9ffbf8d8bf978 = $(`<div id="html_fe0d2e4c0e446e5ac6e9ffbf8d8bf978" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Akoko</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>31</b> événements<br>         📊 Goldstein : <b>-2.36</b>     </div>     </div>`)[0];
+                popup_c9b3dd5878377740246b37b49bbe6e0a.setContent(html_fe0d2e4c0e446e5ac6e9ffbf8d8bf978);
+            
+        
+
+        circle_marker_853e84c3b976be2d00f9e9cfb23dc0f4.bindPopup(popup_c9b3dd5878377740246b37b49bbe6e0a)
+        ;
+
+        
+    
+    
+            circle_marker_853e84c3b976be2d00f9e9cfb23dc0f4.bindTooltip(
+                `<div>
+                     📍 Akoko  ·  31 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_00d3f4370067621f282dd8cef6fb7ec4 = L.circleMarker(
+                [6.66547, 2.15138],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 15.0, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_8a1595a4c34afa34fe3cf046929d0a48 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_41b362b8a24fceaf4db7cb5ff3e3b16b = $(`<div id="html_41b362b8a24fceaf4db7cb5ff3e3b16b" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Allada</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>30</b> événements<br>         📊 Goldstein : <b>-2.65</b>     </div>     </div>`)[0];
+                popup_8a1595a4c34afa34fe3cf046929d0a48.setContent(html_41b362b8a24fceaf4db7cb5ff3e3b16b);
+            
+        
+
+        circle_marker_00d3f4370067621f282dd8cef6fb7ec4.bindPopup(popup_8a1595a4c34afa34fe3cf046929d0a48)
+        ;
+
+        
+    
+    
+            circle_marker_00d3f4370067621f282dd8cef6fb7ec4.bindTooltip(
+                `<div>
+                     📍 Allada  ·  30 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3994f24cc949d7cd677d314b2104ae48 = L.circleMarker(
+                [10.8945, 1.16328],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 14.0, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_0d65f22e2d5eb573d0d3953dc7d346ee = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_e7d0947b4b9433d2e86d9532221b4f5f = $(`<div id="html_e7d0947b4b9433d2e86d9532221b4f5f" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Koudou</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>28</b> événements<br>         📊 Goldstein : <b>-2.1</b>     </div>     </div>`)[0];
+                popup_0d65f22e2d5eb573d0d3953dc7d346ee.setContent(html_e7d0947b4b9433d2e86d9532221b4f5f);
+            
+        
+
+        circle_marker_3994f24cc949d7cd677d314b2104ae48.bindPopup(popup_0d65f22e2d5eb573d0d3953dc7d346ee)
+        ;
+
+        
+    
+    
+            circle_marker_3994f24cc949d7cd677d314b2104ae48.bindTooltip(
+                `<div>
+                     📍 Koudou  ·  28 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_202878a032c7f4d0430f81e7f9f7f496 = L.circleMarker(
+                [10.3042, 1.37962],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 14.0, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_e53998faad91468ba56496aa20fad779 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_ce531b56e34e883200adfaf5e05015c8 = $(`<div id="html_ce531b56e34e883200adfaf5e05015c8" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Natitingou</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>28</b> événements<br>         📊 Goldstein : <b>-0.8</b>     </div>     </div>`)[0];
+                popup_e53998faad91468ba56496aa20fad779.setContent(html_ce531b56e34e883200adfaf5e05015c8);
+            
+        
+
+        circle_marker_202878a032c7f4d0430f81e7f9f7f496.bindPopup(popup_e53998faad91468ba56496aa20fad779)
+        ;
+
+        
+    
+    
+            circle_marker_202878a032c7f4d0430f81e7f9f7f496.bindTooltip(
+                `<div>
+                     📍 Natitingou  ·  28 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d68fe5685831061e0c7d2126ea20b692 = L.circleMarker(
+                [6.98007, 2.6649],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F5A800", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12.5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_d4b629d90d9045dd829946b10ef2a066 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_c8b64699cfa9cacd457759bc47dfc152 = $(`<div id="html_c8b64699cfa9cacd457759bc47dfc152" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Pobe</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🟡 <b>Cooperation</b><br>         🗓 <b>25</b> événements<br>         📊 Goldstein : <b>3.86</b>     </div>     </div>`)[0];
+                popup_d4b629d90d9045dd829946b10ef2a066.setContent(html_c8b64699cfa9cacd457759bc47dfc152);
+            
+        
+
+        circle_marker_d68fe5685831061e0c7d2126ea20b692.bindPopup(popup_d4b629d90d9045dd829946b10ef2a066)
+        ;
+
+        
+    
+    
+            circle_marker_d68fe5685831061e0c7d2126ea20b692.bindTooltip(
+                `<div>
+                     📍 Pobe  ·  25 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_cf21f98c1fc3877def49f49b72a06809 = L.circleMarker(
+                [10.2927, 3.38367],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12.0, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_f9262df820390dcc4190bb70239b6b59 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_d903b71a9e36a9b0cdf7b381dfd7b0a7 = $(`<div id="html_d903b71a9e36a9b0cdf7b381dfd7b0a7" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Kalale</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>24</b> événements<br>         📊 Goldstein : <b>-3.0</b>     </div>     </div>`)[0];
+                popup_f9262df820390dcc4190bb70239b6b59.setContent(html_d903b71a9e36a9b0cdf7b381dfd7b0a7);
+            
+        
+
+        circle_marker_cf21f98c1fc3877def49f49b72a06809.bindPopup(popup_f9262df820390dcc4190bb70239b6b59)
+        ;
+
+        
+    
+    
+            circle_marker_cf21f98c1fc3877def49f49b72a06809.bindTooltip(
+                `<div>
+                     📍 Kalale  ·  24 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_098e76ea061137fb6a2ed4c863bc001b = L.circleMarker(
+                [6.91667, 1.91667],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12.0, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_ab6b2caa266d2279dec69d44f6694b90 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_1f30ec51cb6f44e7c1f2dbd730dd19b5 = $(`<div id="html_1f30ec51cb6f44e7c1f2dbd730dd19b5" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Alassane</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>24</b> événements<br>         📊 Goldstein : <b>-2.74</b>     </div>     </div>`)[0];
+                popup_ab6b2caa266d2279dec69d44f6694b90.setContent(html_1f30ec51cb6f44e7c1f2dbd730dd19b5);
+            
+        
+
+        circle_marker_098e76ea061137fb6a2ed4c863bc001b.bindPopup(popup_ab6b2caa266d2279dec69d44f6694b90)
+        ;
+
+        
+    
+    
+            circle_marker_098e76ea061137fb6a2ed4c863bc001b.bindTooltip(
+                `<div>
+                     📍 Alassane  ·  24 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9ba0b295f8b6026f7a6ed0cd4b406fde = L.circleMarker(
+                [7.10105, 1.96827],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11.5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_600de719cb2187ba5cc5afe29380280a = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_b7f5827d41cf6362463fc8a3e51f9310 = $(`<div id="html_b7f5827d41cf6362463fc8a3e51f9310" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Kpodji</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>23</b> événements<br>         📊 Goldstein : <b>-0.14</b>     </div>     </div>`)[0];
+                popup_600de719cb2187ba5cc5afe29380280a.setContent(html_b7f5827d41cf6362463fc8a3e51f9310);
+            
+        
+
+        circle_marker_9ba0b295f8b6026f7a6ed0cd4b406fde.bindPopup(popup_600de719cb2187ba5cc5afe29380280a)
+        ;
+
+        
+    
+    
+            circle_marker_9ba0b295f8b6026f7a6ed0cd4b406fde.bindTooltip(
+                `<div>
+                     📍 Kpodji  ·  23 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3cb0cb438d9af5677bfb139cbf010e6d = L.circleMarker(
+                [9.8636, 2.72094],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11.5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_be43c9a1d64328db5cef7351cbef6560 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_81fadd67de13bd9696bb9b6e78b9855d = $(`<div id="html_81fadd67de13bd9696bb9b6e78b9855d" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Ndali</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>23</b> événements<br>         📊 Goldstein : <b>-1.59</b>     </div>     </div>`)[0];
+                popup_be43c9a1d64328db5cef7351cbef6560.setContent(html_81fadd67de13bd9696bb9b6e78b9855d);
+            
+        
+
+        circle_marker_3cb0cb438d9af5677bfb139cbf010e6d.bindPopup(popup_be43c9a1d64328db5cef7351cbef6560)
+        ;
+
+        
+    
+    
+            circle_marker_3cb0cb438d9af5677bfb139cbf010e6d.bindTooltip(
+                `<div>
+                     📍 Ndali  ·  23 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_fd8783a650a8d778e4b7736476de0ed3 = L.circleMarker(
+                [9.70853, 1.66598],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_c5b3c6a0ec7b68c22ca0f736035c28c0 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_ae135446a04fab7a62055aac175fcdff = $(`<div id="html_ae135446a04fab7a62055aac175fcdff" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Djougou</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>21</b> événements<br>         📊 Goldstein : <b>-2.63</b>     </div>     </div>`)[0];
+                popup_c5b3c6a0ec7b68c22ca0f736035c28c0.setContent(html_ae135446a04fab7a62055aac175fcdff);
+            
+        
+
+        circle_marker_fd8783a650a8d778e4b7736476de0ed3.bindPopup(popup_c5b3c6a0ec7b68c22ca0f736035c28c0)
+        ;
+
+        
+    
+    
+            circle_marker_fd8783a650a8d778e4b7736476de0ed3.bindTooltip(
+                `<div>
+                     📍 Djougou  ·  21 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c5606c417f0d8d8bb954ef930d048fa5 = L.circleMarker(
+                [7.36332, 2.59978],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.0, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_ce7b2530295ef6a27d849a68d929de0b = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_c3983253928f389fe820a57ca21088b8 = $(`<div id="html_c3983253928f389fe820a57ca21088b8" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Ketu</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>20</b> événements<br>         📊 Goldstein : <b>0.29</b>     </div>     </div>`)[0];
+                popup_ce7b2530295ef6a27d849a68d929de0b.setContent(html_c3983253928f389fe820a57ca21088b8);
+            
+        
+
+        circle_marker_c5606c417f0d8d8bb954ef930d048fa5.bindPopup(popup_ce7b2530295ef6a27d849a68d929de0b)
+        ;
+
+        
+    
+    
+            circle_marker_c5606c417f0d8d8bb954ef930d048fa5.bindTooltip(
+                `<div>
+                     📍 Ketu  ·  20 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_70d12c2a364abbba1de436c9d6786485 = L.circleMarker(
+                [7.81667, 1.76667],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F5A800", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.0, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_0f82df745bf4d2c58ef7af3876fe1991 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_7b02bc74d892c9802684a531e1f27ab8 = $(`<div id="html_7b02bc74d892c9802684a531e1f27ab8" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Tchoukou</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🟡 <b>Cooperation</b><br>         🗓 <b>20</b> événements<br>         📊 Goldstein : <b>3.5</b>     </div>     </div>`)[0];
+                popup_0f82df745bf4d2c58ef7af3876fe1991.setContent(html_7b02bc74d892c9802684a531e1f27ab8);
+            
+        
+
+        circle_marker_70d12c2a364abbba1de436c9d6786485.bindPopup(popup_0f82df745bf4d2c58ef7af3876fe1991)
+        ;
+
+        
+    
+    
+            circle_marker_70d12c2a364abbba1de436c9d6786485.bindTooltip(
+                `<div>
+                     📍 Tchoukou  ·  20 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d935903db9d4119709d2c78c7f76bd50 = L.circleMarker(
+                [9.75, 2.75],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9.0, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_30ccf76ade3e0c3fac43286460e7eac5 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_699ae29387a3cb854a273e7f70debfeb = $(`<div id="html_699ae29387a3cb854a273e7f70debfeb" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Borgou</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>18</b> événements<br>         📊 Goldstein : <b>-2.84</b>     </div>     </div>`)[0];
+                popup_30ccf76ade3e0c3fac43286460e7eac5.setContent(html_699ae29387a3cb854a273e7f70debfeb);
+            
+        
+
+        circle_marker_d935903db9d4119709d2c78c7f76bd50.bindPopup(popup_30ccf76ade3e0c3fac43286460e7eac5)
+        ;
+
+        
+    
+    
+            circle_marker_d935903db9d4119709d2c78c7f76bd50.bindTooltip(
+                `<div>
+                     📍 Borgou  ·  18 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_bf5585955264b4546156df0227c02044 = L.circleMarker(
+                [6.38948, 2.34581],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9.0, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_e4e9d4ccc39d989df9700b7bd24da68d = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_ef0bef4cd76de88d3880db593a12ae14 = $(`<div id="html_ef0bef4cd76de88d3880db593a12ae14" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Godomey</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>18</b> événements<br>         📊 Goldstein : <b>-1.85</b>     </div>     </div>`)[0];
+                popup_e4e9d4ccc39d989df9700b7bd24da68d.setContent(html_ef0bef4cd76de88d3880db593a12ae14);
+            
+        
+
+        circle_marker_bf5585955264b4546156df0227c02044.bindPopup(popup_e4e9d4ccc39d989df9700b7bd24da68d)
+        ;
+
+        
+    
+    
+            circle_marker_bf5585955264b4546156df0227c02044.bindTooltip(
+                `<div>
+                     📍 Godomey  ·  18 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2746d807c5503a139d5182d013f41736 = L.circleMarker(
+                [9.66167, 1.38472],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_4c8f4a1edebb01d7b37fe2a1d09c5631 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_435d6d03166587857435a6d791eb5ee3 = $(`<div id="html_435d6d03166587857435a6d791eb5ee3" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Ouake</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>17</b> événements<br>         📊 Goldstein : <b>-0.1</b>     </div>     </div>`)[0];
+                popup_4c8f4a1edebb01d7b37fe2a1d09c5631.setContent(html_435d6d03166587857435a6d791eb5ee3);
+            
+        
+
+        circle_marker_2746d807c5503a139d5182d013f41736.bindPopup(popup_4c8f4a1edebb01d7b37fe2a1d09c5631)
+        ;
+
+        
+    
+    
+            circle_marker_2746d807c5503a139d5182d013f41736.bindTooltip(
+                `<div>
+                     📍 Ouake  ·  17 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7563b58d2fbb90607a2a5bddc45f3af0 = L.circleMarker(
+                [7.01717, 2.45608],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_0c118ab97bc9c588a142e070998fbe4c = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_83c679316b04175b3c546614d98bd384 = $(`<div id="html_83c679316b04175b3c546614d98bd384" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Dosso</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>17</b> événements<br>         📊 Goldstein : <b>-1.84</b>     </div>     </div>`)[0];
+                popup_0c118ab97bc9c588a142e070998fbe4c.setContent(html_83c679316b04175b3c546614d98bd384);
+            
+        
+
+        circle_marker_7563b58d2fbb90607a2a5bddc45f3af0.bindPopup(popup_0c118ab97bc9c588a142e070998fbe4c)
+        ;
+
+        
+    
+    
+            circle_marker_7563b58d2fbb90607a2a5bddc45f3af0.bindTooltip(
+                `<div>
+                     📍 Dosso  ·  17 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6d6251938ce2c4311aeee3393d2f1b62 = L.circleMarker(
+                [10.8145, 1.43101],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_9ac9177d8ebbc2e7a10aee8657726302 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_3c960ad059aedcc3ca57beed3f64b72c = $(`<div id="html_3c960ad059aedcc3ca57beed3f64b72c" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Tanougou</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>17</b> événements<br>         📊 Goldstein : <b>-5.5</b>     </div>     </div>`)[0];
+                popup_9ac9177d8ebbc2e7a10aee8657726302.setContent(html_3c960ad059aedcc3ca57beed3f64b72c);
+            
+        
+
+        circle_marker_6d6251938ce2c4311aeee3393d2f1b62.bindPopup(popup_9ac9177d8ebbc2e7a10aee8657726302)
+        ;
+
+        
+    
+    
+            circle_marker_6d6251938ce2c4311aeee3393d2f1b62.bindTooltip(
+                `<div>
+                     📍 Tanougou  ·  17 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_526102f1f066b882c02e5a72c4a1e6af = L.circleMarker(
+                [6.5874, 1.96539],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F5A800", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.0, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_5a4e6ffc6078212029ff09d59bb28d9a = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_fc90731c6a1e532dc9f620f3d07c2672 = $(`<div id="html_fc90731c6a1e532dc9f620f3d07c2672" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Bopa</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🟡 <b>Cooperation</b><br>         🗓 <b>16</b> événements<br>         📊 Goldstein : <b>2.35</b>     </div>     </div>`)[0];
+                popup_5a4e6ffc6078212029ff09d59bb28d9a.setContent(html_fc90731c6a1e532dc9f620f3d07c2672);
+            
+        
+
+        circle_marker_526102f1f066b882c02e5a72c4a1e6af.bindPopup(popup_5a4e6ffc6078212029ff09d59bb28d9a)
+        ;
+
+        
+    
+    
+            circle_marker_526102f1f066b882c02e5a72c4a1e6af.bindTooltip(
+                `<div>
+                     📍 Bopa  ·  16 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7a0feec109953eb7fa11ec4c1a064adf = L.circleMarker(
+                [7.34436, 1.93447],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F5A800", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.0, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_4601a696fae50372737780aacbf4c218 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_cca5e9bac730d40d11ae4b6905029176 = $(`<div id="html_cca5e9bac730d40d11ae4b6905029176" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Djidja</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🟡 <b>Cooperation</b><br>         🗓 <b>16</b> événements<br>         📊 Goldstein : <b>3.33</b>     </div>     </div>`)[0];
+                popup_4601a696fae50372737780aacbf4c218.setContent(html_cca5e9bac730d40d11ae4b6905029176);
+            
+        
+
+        circle_marker_7a0feec109953eb7fa11ec4c1a064adf.bindPopup(popup_4601a696fae50372737780aacbf4c218)
+        ;
+
+        
+    
+    
+            circle_marker_7a0feec109953eb7fa11ec4c1a064adf.bindTooltip(
+                `<div>
+                     📍 Djidja  ·  16 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_cf3a9f895d6950e4ad219310141dd6b5 = L.circleMarker(
+                [10.75, 1.66667],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.0, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_3bd429e5d6230cf906ebfb920a8c8bd8 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_21b1273f0ed49ef8218febe0ecb81ae6 = $(`<div id="html_21b1273f0ed49ef8218febe0ecb81ae6" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Atacora</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>16</b> événements<br>         📊 Goldstein : <b>-2.18</b>     </div>     </div>`)[0];
+                popup_3bd429e5d6230cf906ebfb920a8c8bd8.setContent(html_21b1273f0ed49ef8218febe0ecb81ae6);
+            
+        
+
+        circle_marker_cf3a9f895d6950e4ad219310141dd6b5.bindPopup(popup_3bd429e5d6230cf906ebfb920a8c8bd8)
+        ;
+
+        
+    
+    
+            circle_marker_cf3a9f895d6950e4ad219310141dd6b5.bindTooltip(
+                `<div>
+                     📍 Atacora  ·  16 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5cf3572e48006398dfdf5ae03fe94cd7 = L.circleMarker(
+                [6.61738, 2.35776],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_b83237b8476f698d62fff94731095b65 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_bf022913bd546f4bf771df6db142f0c0 = $(`<div id="html_bf022913bd546f4bf771df6db142f0c0" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Zinvie</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>15</b> événements<br>         📊 Goldstein : <b>-1.56</b>     </div>     </div>`)[0];
+                popup_b83237b8476f698d62fff94731095b65.setContent(html_bf022913bd546f4bf771df6db142f0c0);
+            
+        
+
+        circle_marker_5cf3572e48006398dfdf5ae03fe94cd7.bindPopup(popup_b83237b8476f698d62fff94731095b65)
+        ;
+
+        
+    
+    
+            circle_marker_5cf3572e48006398dfdf5ae03fe94cd7.bindTooltip(
+                `<div>
+                     📍 Zinvie  ·  15 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_8455128965503f484607221ca27610cf = L.circleMarker(
+                [6.35, 2.4],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.0, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_c2c7fb8b962d60298dd1ae0b878149a9 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_e7fec83571267ebbeeb160a1fda671b7 = $(`<div id="html_e7fec83571267ebbeeb160a1fda671b7" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Cadjehoun</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>14</b> événements<br>         📊 Goldstein : <b>-3.57</b>     </div>     </div>`)[0];
+                popup_c2c7fb8b962d60298dd1ae0b878149a9.setContent(html_e7fec83571267ebbeeb160a1fda671b7);
+            
+        
+
+        circle_marker_8455128965503f484607221ca27610cf.bindPopup(popup_c2c7fb8b962d60298dd1ae0b878149a9)
+        ;
+
+        
+    
+    
+            circle_marker_8455128965503f484607221ca27610cf.bindTooltip(
+                `<div>
+                     📍 Cadjehoun  ·  14 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f72fe57213837747e88b49c3ae2d55d2 = L.circleMarker(
+                [7.97252, 2.22176],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.0, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_caa65303a1d5562a8f71580dab911316 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_51ecd580946d8c943f9bac7f50fb8215 = $(`<div id="html_51ecd580946d8c943f9bac7f50fb8215" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Glazoue</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>12</b> événements<br>         📊 Goldstein : <b>-0.26</b>     </div>     </div>`)[0];
+                popup_caa65303a1d5562a8f71580dab911316.setContent(html_51ecd580946d8c943f9bac7f50fb8215);
+            
+        
+
+        circle_marker_f72fe57213837747e88b49c3ae2d55d2.bindPopup(popup_caa65303a1d5562a8f71580dab911316)
+        ;
+
+        
+    
+    
+            circle_marker_f72fe57213837747e88b49c3ae2d55d2.bindTooltip(
+                `<div>
+                     📍 Glazoue  ·  12 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a6e0e55458e5d71f410dccdfef3ec4cb = L.circleMarker(
+                [6.50299, 2.36791],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_f6a2e0671703ff7f8178b9fae70315c1 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_4671af86a5948f2795d36f4f8d4f87c8 = $(`<div id="html_4671af86a5948f2795d36f4f8d4f87c8" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Akassato</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>10</b> événements<br>         📊 Goldstein : <b>-1.96</b>     </div>     </div>`)[0];
+                popup_f6a2e0671703ff7f8178b9fae70315c1.setContent(html_4671af86a5948f2795d36f4f8d4f87c8);
+            
+        
+
+        circle_marker_a6e0e55458e5d71f410dccdfef3ec4cb.bindPopup(popup_f6a2e0671703ff7f8178b9fae70315c1)
+        ;
+
+        
+    
+    
+            circle_marker_a6e0e55458e5d71f410dccdfef3ec4cb.bindTooltip(
+                `<div>
+                     📍 Akassato  ·  10 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_31b9e3822752514718ce9b8cd359fa0d = L.circleMarker(
+                [6.4, 2.66667],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F5A800", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_5784c81355c393b1d2c64fa95b7c1060 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_7ba3446abc13f5bc05605b81ef9dfece = $(`<div id="html_7ba3446abc13f5bc05605b81ef9dfece" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Akrake</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🟡 <b>Cooperation</b><br>         🗓 <b>10</b> événements<br>         📊 Goldstein : <b>3.71</b>     </div>     </div>`)[0];
+                popup_5784c81355c393b1d2c64fa95b7c1060.setContent(html_7ba3446abc13f5bc05605b81ef9dfece);
+            
+        
+
+        circle_marker_31b9e3822752514718ce9b8cd359fa0d.bindPopup(popup_5784c81355c393b1d2c64fa95b7c1060)
+        ;
+
+        
+    
+    
+            circle_marker_31b9e3822752514718ce9b8cd359fa0d.bindTooltip(
+                `<div>
+                     📍 Akrake  ·  10 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_97b78e05b9a68af9e59605550e1f52b0 = L.circleMarker(
+                [6.66667, 2.25],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F5A800", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_66cc9d9d931c34931f662a54d0c7e1de = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_5bee9246feb7b41ec836b231e0835d16 = $(`<div id="html_5bee9246feb7b41ec836b231e0835d16" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Atlantique</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🟡 <b>Cooperation</b><br>         🗓 <b>10</b> événements<br>         📊 Goldstein : <b>1.9</b>     </div>     </div>`)[0];
+                popup_66cc9d9d931c34931f662a54d0c7e1de.setContent(html_5bee9246feb7b41ec836b231e0835d16);
+            
+        
+
+        circle_marker_97b78e05b9a68af9e59605550e1f52b0.bindPopup(popup_66cc9d9d931c34931f662a54d0c7e1de)
+        ;
+
+        
+    
+    
+            circle_marker_97b78e05b9a68af9e59605550e1f52b0.bindTooltip(
+                `<div>
+                     📍 Atlantique  ·  10 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_52b8c1e78ebebb809f1aa2bd07af047c = L.circleMarker(
+                [6.36536, 2.41833],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F5A800", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_cd6b50a4aae1ed691e04b1c9216a8096 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_e4c03f7598b023be94dd685a291098d6 = $(`<div id="html_e4c03f7598b023be94dd685a291098d6" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Cotonou</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🟡 <b>Cooperation</b><br>         🗓 <b>9</b> événements<br>         📊 Goldstein : <b>2.44</b>     </div>     </div>`)[0];
+                popup_cd6b50a4aae1ed691e04b1c9216a8096.setContent(html_e4c03f7598b023be94dd685a291098d6);
+            
+        
+
+        circle_marker_52b8c1e78ebebb809f1aa2bd07af047c.bindPopup(popup_cd6b50a4aae1ed691e04b1c9216a8096)
+        ;
+
+        
+    
+    
+            circle_marker_52b8c1e78ebebb809f1aa2bd07af047c.bindTooltip(
+                `<div>
+                     📍 Cotonou  ·  9 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_693faae027581f846ee66bd281c71cf6 = L.circleMarker(
+                [11.7765, 3.21176],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_d8bc19877875bc0d03a7b4f45ab9b90a = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_cfede2661ade243d149671f16ef3a654 = $(`<div id="html_cfede2661ade243d149671f16ef3a654" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Kantoro</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>8</b> événements<br>         📊 Goldstein : <b>-1.42</b>     </div>     </div>`)[0];
+                popup_d8bc19877875bc0d03a7b4f45ab9b90a.setContent(html_cfede2661ade243d149671f16ef3a654);
+            
+        
+
+        circle_marker_693faae027581f846ee66bd281c71cf6.bindPopup(popup_d8bc19877875bc0d03a7b4f45ab9b90a)
+        ;
+
+        
+    
+    
+            circle_marker_693faae027581f846ee66bd281c71cf6.bindTooltip(
+                `<div>
+                     📍 Kantoro  ·  8 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_76179c4e540814efa14df728fcb1c165 = L.circleMarker(
+                [6.38948, 2.28527],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F5A800", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_be0bf8edf63cb54fb75e1556a2d1753c = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_f8be37cf5cc0939f36e5f7e696e5b6fd = $(`<div id="html_f8be37cf5cc0939f36e5f7e696e5b6fd" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Cococodji</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🟡 <b>Cooperation</b><br>         🗓 <b>8</b> événements<br>         📊 Goldstein : <b>2.45</b>     </div>     </div>`)[0];
+                popup_be0bf8edf63cb54fb75e1556a2d1753c.setContent(html_f8be37cf5cc0939f36e5f7e696e5b6fd);
+            
+        
+
+        circle_marker_76179c4e540814efa14df728fcb1c165.bindPopup(popup_be0bf8edf63cb54fb75e1556a2d1753c)
+        ;
+
+        
+    
+    
+            circle_marker_76179c4e540814efa14df728fcb1c165.bindTooltip(
+                `<div>
+                     📍 Cococodji  ·  8 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_cfdc20d90cc208255fac20c68fa2a4dd = L.circleMarker(
+                [10.75, 1.66667],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F5A800", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_72456974c7bc02cf5c9c2742498e5031 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_4d7d617e6d93120c3f495610dd5af6ff = $(`<div id="html_4d7d617e6d93120c3f495610dd5af6ff" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Atakora</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🟡 <b>Cooperation</b><br>         🗓 <b>8</b> événements<br>         📊 Goldstein : <b>3.32</b>     </div>     </div>`)[0];
+                popup_72456974c7bc02cf5c9c2742498e5031.setContent(html_4d7d617e6d93120c3f495610dd5af6ff);
+            
+        
+
+        circle_marker_cfdc20d90cc208255fac20c68fa2a4dd.bindPopup(popup_72456974c7bc02cf5c9c2742498e5031)
+        ;
+
+        
+    
+    
+            circle_marker_cfdc20d90cc208255fac20c68fa2a4dd.bindTooltip(
+                `<div>
+                     📍 Atakora  ·  8 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_fec44f5083cd2dee6942da422b494e8c = L.circleMarker(
+                [7.36332, 2.59978],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F5A800", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_81ca150936ccca495a2674de9e2e7faa = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_6033b6d649664d94b351c261ee2415a3 = $(`<div id="html_6033b6d649664d94b351c261ee2415a3" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Ketou</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🟡 <b>Cooperation</b><br>         🗓 <b>8</b> événements<br>         📊 Goldstein : <b>3.4</b>     </div>     </div>`)[0];
+                popup_81ca150936ccca495a2674de9e2e7faa.setContent(html_6033b6d649664d94b351c261ee2415a3);
+            
+        
+
+        circle_marker_fec44f5083cd2dee6942da422b494e8c.bindPopup(popup_81ca150936ccca495a2674de9e2e7faa)
+        ;
+
+        
+    
+    
+            circle_marker_fec44f5083cd2dee6942da422b494e8c.bindTooltip(
+                `<div>
+                     📍 Ketou  ·  8 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_528c14116d7016b26a37b9ec406333eb = L.circleMarker(
+                [9.70906, 1.95035],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F5A800", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_1f0253659e79e7e05e5b11727129a2da = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_a12ce558cf05635196525568c078917f = $(`<div id="html_a12ce558cf05635196525568c078917f" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Oueme</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🟡 <b>Cooperation</b><br>         🗓 <b>7</b> événements<br>         📊 Goldstein : <b>4.53</b>     </div>     </div>`)[0];
+                popup_1f0253659e79e7e05e5b11727129a2da.setContent(html_a12ce558cf05635196525568c078917f);
+            
+        
+
+        circle_marker_528c14116d7016b26a37b9ec406333eb.bindPopup(popup_1f0253659e79e7e05e5b11727129a2da)
+        ;
+
+        
+    
+    
+            circle_marker_528c14116d7016b26a37b9ec406333eb.bindTooltip(
+                `<div>
+                     📍 Oueme  ·  7 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f8efdc292049c882448822a2bb5f1cfe = L.circleMarker(
+                [9.28773, 2.78112],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_5990d3bd6faa4b2d3327eee90875e7af = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_b4c006ee98fc2e598a3b0a9e4c819c26 = $(`<div id="html_b4c006ee98fc2e598a3b0a9e4c819c26" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Kika</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>7</b> événements<br>         📊 Goldstein : <b>-4.25</b>     </div>     </div>`)[0];
+                popup_5990d3bd6faa4b2d3327eee90875e7af.setContent(html_b4c006ee98fc2e598a3b0a9e4c819c26);
+            
+        
+
+        circle_marker_f8efdc292049c882448822a2bb5f1cfe.bindPopup(popup_5990d3bd6faa4b2d3327eee90875e7af)
+        ;
+
+        
+    
+    
+            circle_marker_f8efdc292049c882448822a2bb5f1cfe.bindTooltip(
+                `<div>
+                     📍 Kika  ·  7 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_765dd665fcafda78170809b307fc1a8c = L.circleMarker(
+                [9.55462, 2.62778],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_2e16f8e6ef8b5a1915218d10215f9824 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_5982517b992dd80cf708408d6833a13c = $(`<div id="html_5982517b992dd80cf708408d6833a13c" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Nile</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>7</b> événements<br>         📊 Goldstein : <b>-0.46</b>     </div>     </div>`)[0];
+                popup_2e16f8e6ef8b5a1915218d10215f9824.setContent(html_5982517b992dd80cf708408d6833a13c);
+            
+        
+
+        circle_marker_765dd665fcafda78170809b307fc1a8c.bindPopup(popup_2e16f8e6ef8b5a1915218d10215f9824)
+        ;
+
+        
+    
+    
+            circle_marker_765dd665fcafda78170809b307fc1a8c.bindTooltip(
+                `<div>
+                     📍 Nile  ·  7 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_da457ac225dd6291f1d0f4ef51379dec = L.circleMarker(
+                [8.5837, 1.69022],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F5A800", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_8fb018412f5c785186e7e8ad34895034 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_26106dfd65f70d2c5697b7ca37f5dc48 = $(`<div id="html_26106dfd65f70d2c5697b7ca37f5dc48" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Bariba</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🟡 <b>Cooperation</b><br>         🗓 <b>7</b> événements<br>         📊 Goldstein : <b>2.66</b>     </div>     </div>`)[0];
+                popup_8fb018412f5c785186e7e8ad34895034.setContent(html_26106dfd65f70d2c5697b7ca37f5dc48);
+            
+        
+
+        circle_marker_da457ac225dd6291f1d0f4ef51379dec.bindPopup(popup_8fb018412f5c785186e7e8ad34895034)
+        ;
+
+        
+    
+    
+            circle_marker_da457ac225dd6291f1d0f4ef51379dec.bindTooltip(
+                `<div>
+                     📍 Bariba  ·  7 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7a629e124624b18c8f346bb9578395f1 = L.circleMarker(
+                [10.5395, 0.869667],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_49310cfefa3196777413914ad2e234f5 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_9ecf57df54a0c2a6d267290878a35994 = $(`<div id="html_9ecf57df54a0c2a6d267290878a35994" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Kayode</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>7</b> événements<br>         📊 Goldstein : <b>-0.65</b>     </div>     </div>`)[0];
+                popup_49310cfefa3196777413914ad2e234f5.setContent(html_9ecf57df54a0c2a6d267290878a35994);
+            
+        
+
+        circle_marker_7a629e124624b18c8f346bb9578395f1.bindPopup(popup_49310cfefa3196777413914ad2e234f5)
+        ;
+
+        
+    
+    
+            circle_marker_7a629e124624b18c8f346bb9578395f1.bindTooltip(
+                `<div>
+                     📍 Kayode  ·  7 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c5e8409929fb3842062003f0c33997db = L.circleMarker(
+                [9.02682, 2.57878],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F5A800", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_691b47c092ac00139c500f727f950565 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_02ff7cb9140c9fc3fbeab6fcc61c3fa3 = $(`<div id="html_02ff7cb9140c9fc3fbeab6fcc61c3fa3" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Gokana</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🟡 <b>Cooperation</b><br>         🗓 <b>6</b> événements<br>         📊 Goldstein : <b>2.4</b>     </div>     </div>`)[0];
+                popup_691b47c092ac00139c500f727f950565.setContent(html_02ff7cb9140c9fc3fbeab6fcc61c3fa3);
+            
+        
+
+        circle_marker_c5e8409929fb3842062003f0c33997db.bindPopup(popup_691b47c092ac00139c500f727f950565)
+        ;
+
+        
+    
+    
+            circle_marker_c5e8409929fb3842062003f0c33997db.bindTooltip(
+                `<div>
+                     📍 Gokana  ·  6 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6c61141eafa4aa693dbdd7dcc076cef6 = L.circleMarker(
+                [9.95457, 3.22136],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_5cf0a82d31b3a720d4509724c440c46e = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_ebea30e3ad25c6903f122980b10e32d1 = $(`<div id="html_ebea30e3ad25c6903f122980b10e32d1" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Gourou</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>6</b> événements<br>         📊 Goldstein : <b>-1.0</b>     </div>     </div>`)[0];
+                popup_5cf0a82d31b3a720d4509724c440c46e.setContent(html_ebea30e3ad25c6903f122980b10e32d1);
+            
+        
+
+        circle_marker_6c61141eafa4aa693dbdd7dcc076cef6.bindPopup(popup_5cf0a82d31b3a720d4509724c440c46e)
+        ;
+
+        
+    
+    
+            circle_marker_6c61141eafa4aa693dbdd7dcc076cef6.bindTooltip(
+                `<div>
+                     📍 Gourou  ·  6 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_027a28fa0240abbb2b8b211b5b783bae = L.circleMarker(
+                [6.45072, 1.92162],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_f05ada1aec13bf5ec831263e996c1cba = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_c39c8e12617c6772ba5d9ef86ed491c8 = $(`<div id="html_c39c8e12617c6772ba5d9ef86ed491c8" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Houeyogbe</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>6</b> événements<br>         📊 Goldstein : <b>0.4</b>     </div>     </div>`)[0];
+                popup_f05ada1aec13bf5ec831263e996c1cba.setContent(html_c39c8e12617c6772ba5d9ef86ed491c8);
+            
+        
+
+        circle_marker_027a28fa0240abbb2b8b211b5b783bae.bindPopup(popup_f05ada1aec13bf5ec831263e996c1cba)
+        ;
+
+        
+    
+    
+            circle_marker_027a28fa0240abbb2b8b211b5b783bae.bindTooltip(
+                `<div>
+                     📍 Houeyogbe  ·  6 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2e6998f729e982249f62f2e325a89adf = L.circleMarker(
+                [9.02839, 2.40438],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F5A800", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_d27180cf3d5e5dba00ec17e38667e7b3 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_45342740c7dd33df240e81908630c809 = $(`<div id="html_45342740c7dd33df240e81908630c809" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Alafia</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🟡 <b>Cooperation</b><br>         🗓 <b>6</b> événements<br>         📊 Goldstein : <b>1.13</b>     </div>     </div>`)[0];
+                popup_d27180cf3d5e5dba00ec17e38667e7b3.setContent(html_45342740c7dd33df240e81908630c809);
+            
+        
+
+        circle_marker_2e6998f729e982249f62f2e325a89adf.bindPopup(popup_d27180cf3d5e5dba00ec17e38667e7b3)
+        ;
+
+        
+    
+    
+            circle_marker_2e6998f729e982249f62f2e325a89adf.bindTooltip(
+                `<div>
+                     📍 Alafia  ·  6 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_efd70a2e20b3b5fa085e6659e7e9972b = L.circleMarker(
+                [6.5847, 2.5499],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F5A800", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_295ca026fc5e5a0e2b93e1e585cab638 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_cadb7bd89d4478a31ed14093a0ca5803 = $(`<div id="html_cadb7bd89d4478a31ed14093a0ca5803" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Dangbo</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🟡 <b>Cooperation</b><br>         🗓 <b>5</b> événements<br>         📊 Goldstein : <b>4.36</b>     </div>     </div>`)[0];
+                popup_295ca026fc5e5a0e2b93e1e585cab638.setContent(html_cadb7bd89d4478a31ed14093a0ca5803);
+            
+        
+
+        circle_marker_efd70a2e20b3b5fa085e6659e7e9972b.bindPopup(popup_295ca026fc5e5a0e2b93e1e585cab638)
+        ;
+
+        
+    
+    
+            circle_marker_efd70a2e20b3b5fa085e6659e7e9972b.bindTooltip(
+                `<div>
+                     📍 Dangbo  ·  5 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_bc61d1e51724a5191e685c8aaa79a37b = L.circleMarker(
+                [8.0, 2.16667],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F5A800", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_2a338a6ff2ae030b4455b74061e95751 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_69685e19988621272078dcc7d78d9da2 = $(`<div id="html_69685e19988621272078dcc7d78d9da2" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Collines</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🟡 <b>Cooperation</b><br>         🗓 <b>5</b> événements<br>         📊 Goldstein : <b>5.1</b>     </div>     </div>`)[0];
+                popup_2a338a6ff2ae030b4455b74061e95751.setContent(html_69685e19988621272078dcc7d78d9da2);
+            
+        
+
+        circle_marker_bc61d1e51724a5191e685c8aaa79a37b.bindPopup(popup_2a338a6ff2ae030b4455b74061e95751)
+        ;
+
+        
+    
+    
+            circle_marker_bc61d1e51724a5191e685c8aaa79a37b.bindTooltip(
+                `<div>
+                     📍 Collines  ·  5 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_60f127ff0981564bdbdad0c94fef8b65 = L.circleMarker(
+                [8.04945, 2.70498],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F5A800", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_835b0a4419b926ac30212873ea793f1d = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_a3135ddaba47f39158547b09832466a7 = $(`<div id="html_a3135ddaba47f39158547b09832466a7" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Okio</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🟡 <b>Cooperation</b><br>         🗓 <b>5</b> événements<br>         📊 Goldstein : <b>3.88</b>     </div>     </div>`)[0];
+                popup_835b0a4419b926ac30212873ea793f1d.setContent(html_a3135ddaba47f39158547b09832466a7);
+            
+        
+
+        circle_marker_60f127ff0981564bdbdad0c94fef8b65.bindPopup(popup_835b0a4419b926ac30212873ea793f1d)
+        ;
+
+        
+    
+    
+            circle_marker_60f127ff0981564bdbdad0c94fef8b65.bindTooltip(
+                `<div>
+                     📍 Okio  ·  5 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0d361443165c7a79f2e25a85e9d8eb89 = L.circleMarker(
+                [6.85, 2.08333],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F5A800", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_f41ffbe8689f0774f2cc927c0cd0bc42 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_fc032cd55b9919bdd9c591ae1e0578dd = $(`<div id="html_fc032cd55b9919bdd9c591ae1e0578dd" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Toffo</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🟡 <b>Cooperation</b><br>         🗓 <b>5</b> événements<br>         📊 Goldstein : <b>2.5</b>     </div>     </div>`)[0];
+                popup_f41ffbe8689f0774f2cc927c0cd0bc42.setContent(html_fc032cd55b9919bdd9c591ae1e0578dd);
+            
+        
+
+        circle_marker_0d361443165c7a79f2e25a85e9d8eb89.bindPopup(popup_f41ffbe8689f0774f2cc927c0cd0bc42)
+        ;
+
+        
+    
+    
+            circle_marker_0d361443165c7a79f2e25a85e9d8eb89.bindTooltip(
+                `<div>
+                     📍 Toffo  ·  5 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_09cad15d1b2ac35d39a535bdc054d7b0 = L.circleMarker(
+                [9.43059, 2.64679],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_611c4464a1ee1765bee64b55bb23d6bd = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_451fd7d2fbc00badcbcb2820a9336379 = $(`<div id="html_451fd7d2fbc00badcbcb2820a9336379" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Komi</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>5</b> événements<br>         📊 Goldstein : <b>-0.47</b>     </div>     </div>`)[0];
+                popup_611c4464a1ee1765bee64b55bb23d6bd.setContent(html_451fd7d2fbc00badcbcb2820a9336379);
+            
+        
+
+        circle_marker_09cad15d1b2ac35d39a535bdc054d7b0.bindPopup(popup_611c4464a1ee1765bee64b55bb23d6bd)
+        ;
+
+        
+    
+    
+            circle_marker_09cad15d1b2ac35d39a535bdc054d7b0.bindTooltip(
+                `<div>
+                     📍 Komi  ·  5 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a7c9b58810c0cda1da7615e9bfc08580 = L.circleMarker(
+                [8.53849, 2.43121],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_76d6fee59c500aae8a64ff7c323d7b6c = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_bf901913d0c77a65872fa9d7c6a71418 = $(`<div id="html_bf901913d0c77a65872fa9d7c6a71418" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Yaye</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>4</b> événements<br>         📊 Goldstein : <b>-2.83</b>     </div>     </div>`)[0];
+                popup_76d6fee59c500aae8a64ff7c323d7b6c.setContent(html_bf901913d0c77a65872fa9d7c6a71418);
+            
+        
+
+        circle_marker_a7c9b58810c0cda1da7615e9bfc08580.bindPopup(popup_76d6fee59c500aae8a64ff7c323d7b6c)
+        ;
+
+        
+    
+    
+            circle_marker_a7c9b58810c0cda1da7615e9bfc08580.bindTooltip(
+                `<div>
+                     📍 Yaye  ·  4 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_35312b0665d60f66367fb1ef89084c68 = L.circleMarker(
+                [6.8224, 2.47281],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F5A800", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_b7351a5a546b420dea7a891dfc9b575f = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_0ef118ab41cfb35c4b560a4ce9eede4b = $(`<div id="html_0ef118ab41cfb35c4b560a4ce9eede4b" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Affame</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🟡 <b>Cooperation</b><br>         🗓 <b>4</b> événements<br>         📊 Goldstein : <b>3.35</b>     </div>     </div>`)[0];
+                popup_b7351a5a546b420dea7a891dfc9b575f.setContent(html_0ef118ab41cfb35c4b560a4ce9eede4b);
+            
+        
+
+        circle_marker_35312b0665d60f66367fb1ef89084c68.bindPopup(popup_b7351a5a546b420dea7a891dfc9b575f)
+        ;
+
+        
+    
+    
+            circle_marker_35312b0665d60f66367fb1ef89084c68.bindTooltip(
+                `<div>
+                     📍 Affame  ·  4 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f44a16b20b09d981124c1a66aac441f2 = L.circleMarker(
+                [11.0962, 3.31587],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_13397f9e840e60603c0da62ac8c4239e = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_0525323f8ba6f3cf182ee9b407642dc5 = $(`<div id="html_0525323f8ba6f3cf182ee9b407642dc5" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Liya</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>4</b> événements<br>         📊 Goldstein : <b>-0.55</b>     </div>     </div>`)[0];
+                popup_13397f9e840e60603c0da62ac8c4239e.setContent(html_0525323f8ba6f3cf182ee9b407642dc5);
+            
+        
+
+        circle_marker_f44a16b20b09d981124c1a66aac441f2.bindPopup(popup_13397f9e840e60603c0da62ac8c4239e)
+        ;
+
+        
+    
+    
+            circle_marker_f44a16b20b09d981124c1a66aac441f2.bindTooltip(
+                `<div>
+                     📍 Liya  ·  4 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_38f717bebdd0925742317b2ef545d954 = L.circleMarker(
+                [6.82148, 1.63998],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_3f2e68b39f623a3bdc79064abebe559f = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_3d3f4676d2ea1e8a183fc1270312789e = $(`<div id="html_3d3f4676d2ea1e8a183fc1270312789e" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Kpota</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>4</b> événements<br>         📊 Goldstein : <b>-0.65</b>     </div>     </div>`)[0];
+                popup_3f2e68b39f623a3bdc79064abebe559f.setContent(html_3d3f4676d2ea1e8a183fc1270312789e);
+            
+        
+
+        circle_marker_38f717bebdd0925742317b2ef545d954.bindPopup(popup_3f2e68b39f623a3bdc79064abebe559f)
+        ;
+
+        
+    
+    
+            circle_marker_38f717bebdd0925742317b2ef545d954.bindTooltip(
+                `<div>
+                     📍 Kpota  ·  4 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9ece40a987df0ee10664bedeabc5976c = L.circleMarker(
+                [8.06217, 1.97427],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F5A800", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_ca08dd038486862a103732799a6f96f6 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_f4f7e061ceea09851bd13ae2c2144f84 = $(`<div id="html_f4f7e061ceea09851bd13ae2c2144f84" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Lozi</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🟡 <b>Cooperation</b><br>         🗓 <b>4</b> événements<br>         📊 Goldstein : <b>4.3</b>     </div>     </div>`)[0];
+                popup_ca08dd038486862a103732799a6f96f6.setContent(html_f4f7e061ceea09851bd13ae2c2144f84);
+            
+        
+
+        circle_marker_9ece40a987df0ee10664bedeabc5976c.bindPopup(popup_ca08dd038486862a103732799a6f96f6)
+        ;
+
+        
+    
+    
+            circle_marker_9ece40a987df0ee10664bedeabc5976c.bindTooltip(
+                `<div>
+                     📍 Lozi  ·  4 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_327f5697360e4e92df0928d722ac613f = L.circleMarker(
+                [10.5427, 1.2026],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F5A800", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_950511c493f14392cf3f560a19913c13 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_f02640e2c3a9d3fdcfcf126bd9604774 = $(`<div id="html_f02640e2c3a9d3fdcfcf126bd9604774" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Taiakou</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🟡 <b>Cooperation</b><br>         🗓 <b>4</b> événements<br>         📊 Goldstein : <b>2.88</b>     </div>     </div>`)[0];
+                popup_950511c493f14392cf3f560a19913c13.setContent(html_f02640e2c3a9d3fdcfcf126bd9604774);
+            
+        
+
+        circle_marker_327f5697360e4e92df0928d722ac613f.bindPopup(popup_950511c493f14392cf3f560a19913c13)
+        ;
+
+        
+    
+    
+            circle_marker_327f5697360e4e92df0928d722ac613f.bindTooltip(
+                `<div>
+                     📍 Taiakou  ·  4 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_535df3cec7fe248385a39cb81aa6dd77 = L.circleMarker(
+                [11.242, 2.38771],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F5A800", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_8c256e6628b6ba7a98e9b9b6513cd105 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_8c5909214f321396e74b244f95b393e7 = $(`<div id="html_8c5909214f321396e74b244f95b393e7" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Toura</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🟡 <b>Cooperation</b><br>         🗓 <b>4</b> événements<br>         📊 Goldstein : <b>2.35</b>     </div>     </div>`)[0];
+                popup_8c256e6628b6ba7a98e9b9b6513cd105.setContent(html_8c5909214f321396e74b244f95b393e7);
+            
+        
+
+        circle_marker_535df3cec7fe248385a39cb81aa6dd77.bindPopup(popup_8c256e6628b6ba7a98e9b9b6513cd105)
+        ;
+
+        
+    
+    
+            circle_marker_535df3cec7fe248385a39cb81aa6dd77.bindTooltip(
+                `<div>
+                     📍 Toura  ·  4 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e786e64ac77a97f7fc6c9af50799ba51 = L.circleMarker(
+                [12.0804, 3.17956],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_e3c74b9ca7cb435335a79e0a4dced66f = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_df52dc3283a42151662ec7fcdfc34ebf = $(`<div id="html_df52dc3283a42151662ec7fcdfc34ebf" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Peul</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>4</b> événements<br>         📊 Goldstein : <b>-9.3</b>     </div>     </div>`)[0];
+                popup_e3c74b9ca7cb435335a79e0a4dced66f.setContent(html_df52dc3283a42151662ec7fcdfc34ebf);
+            
+        
+
+        circle_marker_e786e64ac77a97f7fc6c9af50799ba51.bindPopup(popup_e3c74b9ca7cb435335a79e0a4dced66f)
+        ;
+
+        
+    
+    
+            circle_marker_e786e64ac77a97f7fc6c9af50799ba51.bindTooltip(
+                `<div>
+                     📍 Peul  ·  4 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d7aa4403f259eb04c19951c35529e0fd = L.circleMarker(
+                [10.1841, 1.09662],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F5A800", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_4ac17694106c8d5c05265dc2b2e1b633 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_b7d0489411a4afc1a21e6110de17c298 = $(`<div id="html_b7d0489411a4afc1a21e6110de17c298" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Zongo</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🟡 <b>Cooperation</b><br>         🗓 <b>4</b> événements<br>         📊 Goldstein : <b>8.0</b>     </div>     </div>`)[0];
+                popup_4ac17694106c8d5c05265dc2b2e1b633.setContent(html_b7d0489411a4afc1a21e6110de17c298);
+            
+        
+
+        circle_marker_d7aa4403f259eb04c19951c35529e0fd.bindPopup(popup_4ac17694106c8d5c05265dc2b2e1b633)
+        ;
+
+        
+    
+    
+            circle_marker_d7aa4403f259eb04c19951c35529e0fd.bindTooltip(
+                `<div>
+                     📍 Zongo  ·  4 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_98eb04299f93383558bb2d770dec94eb = L.circleMarker(
+                [7.75, 2.18333],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F5A800", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_7a170d8f043fdfefc750143c738c7b46 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_55f40731c19afe397524de6f35266c2f = $(`<div id="html_55f40731c19afe397524de6f35266c2f" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Dassa-Zoume</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🟡 <b>Cooperation</b><br>         🗓 <b>4</b> événements<br>         📊 Goldstein : <b>4.3</b>     </div>     </div>`)[0];
+                popup_7a170d8f043fdfefc750143c738c7b46.setContent(html_55f40731c19afe397524de6f35266c2f);
+            
+        
+
+        circle_marker_98eb04299f93383558bb2d770dec94eb.bindPopup(popup_7a170d8f043fdfefc750143c738c7b46)
+        ;
+
+        
+    
+    
+            circle_marker_98eb04299f93383558bb2d770dec94eb.bindTooltip(
+                `<div>
+                     📍 Dassa-Zoume  ·  4 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5cfdbe591bce9c0774e35e5133dafc10 = L.circleMarker(
+                [6.7, 2.75],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_70cf0cc2ba0ed6d2b4739d860dff8174 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_b8588763d24292a70bf89ea7adda58f7 = $(`<div id="html_b8588763d24292a70bf89ea7adda58f7" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Djibo</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>4</b> événements<br>         📊 Goldstein : <b>-1.75</b>     </div>     </div>`)[0];
+                popup_70cf0cc2ba0ed6d2b4739d860dff8174.setContent(html_b8588763d24292a70bf89ea7adda58f7);
+            
+        
+
+        circle_marker_5cfdbe591bce9c0774e35e5133dafc10.bindPopup(popup_70cf0cc2ba0ed6d2b4739d860dff8174)
+        ;
+
+        
+    
+    
+            circle_marker_5cfdbe591bce9c0774e35e5133dafc10.bindTooltip(
+                `<div>
+                     📍 Djibo  ·  4 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1cd7219964fe6c9d7a094d38d1d11435 = L.circleMarker(
+                [7.82414, 1.32319],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_3a311b1bf841bc3be6404ee5349e1b2e = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_6d73a436ebb8db7d3fe0417103d610f2 = $(`<div id="html_6d73a436ebb8db7d3fe0417103d610f2" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Ogou</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>3</b> événements<br>         📊 Goldstein : <b>-0.83</b>     </div>     </div>`)[0];
+                popup_3a311b1bf841bc3be6404ee5349e1b2e.setContent(html_6d73a436ebb8db7d3fe0417103d610f2);
+            
+        
+
+        circle_marker_1cd7219964fe6c9d7a094d38d1d11435.bindPopup(popup_3a311b1bf841bc3be6404ee5349e1b2e)
+        ;
+
+        
+    
+    
+            circle_marker_1cd7219964fe6c9d7a094d38d1d11435.bindTooltip(
+                `<div>
+                     📍 Ogou  ·  3 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_cffc63a0b2a976dc589dbf0b37fa0713 = L.circleMarker(
+                [10.1895, 2.93085],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F5A800", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_2c5ac7dcc8e69c39386b8bdc50e2c22f = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_a8396f1264daf3f8ddab4f87515bf13a = $(`<div id="html_a8396f1264daf3f8ddab4f87515bf13a" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Segou</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🟡 <b>Cooperation</b><br>         🗓 <b>3</b> événements<br>         📊 Goldstein : <b>2.2</b>     </div>     </div>`)[0];
+                popup_2c5ac7dcc8e69c39386b8bdc50e2c22f.setContent(html_a8396f1264daf3f8ddab4f87515bf13a);
+            
+        
+
+        circle_marker_cffc63a0b2a976dc589dbf0b37fa0713.bindPopup(popup_2c5ac7dcc8e69c39386b8bdc50e2c22f)
+        ;
+
+        
+    
+    
+            circle_marker_cffc63a0b2a976dc589dbf0b37fa0713.bindTooltip(
+                `<div>
+                     📍 Segou  ·  3 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f01377dbd4f0eb52ea99fa327860cbe5 = L.circleMarker(
+                [6.39209, 2.53725],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F5A800", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_1f34dc54d8d12242d9006358c4ba3eae = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_7b00dd9f6abc4d07d48cf5d012dd2f8e = $(`<div id="html_7b00dd9f6abc4d07d48cf5d012dd2f8e" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Ekpe</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🟡 <b>Cooperation</b><br>         🗓 <b>3</b> événements<br>         📊 Goldstein : <b>2.57</b>     </div>     </div>`)[0];
+                popup_1f34dc54d8d12242d9006358c4ba3eae.setContent(html_7b00dd9f6abc4d07d48cf5d012dd2f8e);
+            
+        
+
+        circle_marker_f01377dbd4f0eb52ea99fa327860cbe5.bindPopup(popup_1f34dc54d8d12242d9006358c4ba3eae)
+        ;
+
+        
+    
+    
+            circle_marker_f01377dbd4f0eb52ea99fa327860cbe5.bindTooltip(
+                `<div>
+                     📍 Ekpe  ·  3 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a224bda0b5d5848019d2a79d72e0759b = L.circleMarker(
+                [9.2179, 2.56571],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F5A800", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_464226b509f9caca2b87b2bfb9edce87 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_d62175d5ff0cf971d21b12bd4b4f0d33 = $(`<div id="html_d62175d5ff0cf971d21b12bd4b4f0d33" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Badekparou</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🟡 <b>Cooperation</b><br>         🗓 <b>3</b> événements<br>         📊 Goldstein : <b>4.8</b>     </div>     </div>`)[0];
+                popup_464226b509f9caca2b87b2bfb9edce87.setContent(html_d62175d5ff0cf971d21b12bd4b4f0d33);
+            
+        
+
+        circle_marker_a224bda0b5d5848019d2a79d72e0759b.bindPopup(popup_464226b509f9caca2b87b2bfb9edce87)
+        ;
+
+        
+    
+    
+            circle_marker_a224bda0b5d5848019d2a79d72e0759b.bindTooltip(
+                `<div>
+                     📍 Badekparou  ·  3 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b170f4206c5ac51cff76fa3bb5724de2 = L.circleMarker(
+                [12.4074, 2.825],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F5A800", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_f3847baa45aba5ccd169d6e11122d673 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_f730912e3a8002a54b238ae061090cef = $(`<div id="html_f730912e3a8002a54b238ae061090cef" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Mekrou</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🟡 <b>Cooperation</b><br>         🗓 <b>3</b> événements<br>         📊 Goldstein : <b>3.0</b>     </div>     </div>`)[0];
+                popup_f3847baa45aba5ccd169d6e11122d673.setContent(html_f730912e3a8002a54b238ae061090cef);
+            
+        
+
+        circle_marker_b170f4206c5ac51cff76fa3bb5724de2.bindPopup(popup_f3847baa45aba5ccd169d6e11122d673)
+        ;
+
+        
+    
+    
+            circle_marker_b170f4206c5ac51cff76fa3bb5724de2.bindTooltip(
+                `<div>
+                     📍 Mekrou  ·  3 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6a1b9bf6b954c5b3536ca264ca74bcef = L.circleMarker(
+                [11.2984, 2.43856],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_44ca723ccc2a22f987b2d9226b8e52d5 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_db9cbc83b422bc444bf516957231d3f8 = $(`<div id="html_db9cbc83b422bc444bf516957231d3f8" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Banikoara</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>2</b> événements<br>         📊 Goldstein : <b>-10.0</b>     </div>     </div>`)[0];
+                popup_44ca723ccc2a22f987b2d9226b8e52d5.setContent(html_db9cbc83b422bc444bf516957231d3f8);
+            
+        
+
+        circle_marker_6a1b9bf6b954c5b3536ca264ca74bcef.bindPopup(popup_44ca723ccc2a22f987b2d9226b8e52d5)
+        ;
+
+        
+    
+    
+            circle_marker_6a1b9bf6b954c5b3536ca264ca74bcef.bindTooltip(
+                `<div>
+                     📍 Banikoara  ·  2 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_000335a2b5638cf7d89d6726552ced90 = L.circleMarker(
+                [6.34555, 2.20338],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F5A800", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_e142e12158b38bab99ee1395bdfc4a60 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_cb83f56ddcdc0fbfc95242c23b1aeab7 = $(`<div id="html_cb83f56ddcdc0fbfc95242c23b1aeab7" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Avlekete</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🟡 <b>Cooperation</b><br>         🗓 <b>2</b> événements<br>         📊 Goldstein : <b>2.35</b>     </div>     </div>`)[0];
+                popup_e142e12158b38bab99ee1395bdfc4a60.setContent(html_cb83f56ddcdc0fbfc95242c23b1aeab7);
+            
+        
+
+        circle_marker_000335a2b5638cf7d89d6726552ced90.bindPopup(popup_e142e12158b38bab99ee1395bdfc4a60)
+        ;
+
+        
+    
+    
+            circle_marker_000335a2b5638cf7d89d6726552ced90.bindTooltip(
+                `<div>
+                     📍 Avlekete  ·  2 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3ea78fbe3051b3977a24bd0d884f8e8b = L.circleMarker(
+                [6.83333, 2.0],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_721f74ceba2e88196e75c623e59e6dc9 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_b15f81076c315fb2df39be52457639e6 = $(`<div id="html_b15f81076c315fb2df39be52457639e6" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Ahomadegbe</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>2</b> événements<br>         📊 Goldstein : <b>-6.0</b>     </div>     </div>`)[0];
+                popup_721f74ceba2e88196e75c623e59e6dc9.setContent(html_b15f81076c315fb2df39be52457639e6);
+            
+        
+
+        circle_marker_3ea78fbe3051b3977a24bd0d884f8e8b.bindPopup(popup_721f74ceba2e88196e75c623e59e6dc9)
+        ;
+
+        
+    
+    
+            circle_marker_3ea78fbe3051b3977a24bd0d884f8e8b.bindTooltip(
+                `<div>
+                     📍 Ahomadegbe  ·  2 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c60292e00998c994b3920ae4460add51 = L.circleMarker(
+                [6.5808, 1.6696],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F5A800", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_99c0a7a8ca9a4cd186be0d16bec48469 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_d0cbcae1d5e1513e4ad9cf87cdbf2eca = $(`<div id="html_d0cbcae1d5e1513e4ad9cf87cdbf2eca" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Athieme</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🟡 <b>Cooperation</b><br>         🗓 <b>2</b> événements<br>         📊 Goldstein : <b>2.35</b>     </div>     </div>`)[0];
+                popup_99c0a7a8ca9a4cd186be0d16bec48469.setContent(html_d0cbcae1d5e1513e4ad9cf87cdbf2eca);
+            
+        
+
+        circle_marker_c60292e00998c994b3920ae4460add51.bindPopup(popup_99c0a7a8ca9a4cd186be0d16bec48469)
+        ;
+
+        
+    
+    
+            circle_marker_c60292e00998c994b3920ae4460add51.bindTooltip(
+                `<div>
+                     📍 Athieme  ·  2 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9f39ecbe03a4f0ca13593d91fb117eef = L.circleMarker(
+                [10.195, 2.12999],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F5A800", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_0c824da4cd1f0d31bd93ab8193151a8a = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_ecc54caef63879f0909f5035614d53c5 = $(`<div id="html_ecc54caef63879f0909f5035614d53c5" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Tobre</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🟡 <b>Cooperation</b><br>         🗓 <b>2</b> événements<br>         📊 Goldstein : <b>1.7</b>     </div>     </div>`)[0];
+                popup_0c824da4cd1f0d31bd93ab8193151a8a.setContent(html_ecc54caef63879f0909f5035614d53c5);
+            
+        
+
+        circle_marker_9f39ecbe03a4f0ca13593d91fb117eef.bindPopup(popup_0c824da4cd1f0d31bd93ab8193151a8a)
+        ;
+
+        
+    
+    
+            circle_marker_9f39ecbe03a4f0ca13593d91fb117eef.bindTooltip(
+                `<div>
+                     📍 Tobre  ·  2 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_97aca1a74df045a4c9b18c54fca83ad7 = L.circleMarker(
+                [6.38774, 2.21423],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F5A800", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_77175ffabcd9a719c1768e8fef3ca54a = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_5d3276f3538c7d20d188e7aea7725032 = $(`<div id="html_5d3276f3538c7d20d188e7aea7725032" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Pahou</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🟡 <b>Cooperation</b><br>         🗓 <b>2</b> événements<br>         📊 Goldstein : <b>1.5</b>     </div>     </div>`)[0];
+                popup_77175ffabcd9a719c1768e8fef3ca54a.setContent(html_5d3276f3538c7d20d188e7aea7725032);
+            
+        
+
+        circle_marker_97aca1a74df045a4c9b18c54fca83ad7.bindPopup(popup_77175ffabcd9a719c1768e8fef3ca54a)
+        ;
+
+        
+    
+    
+            circle_marker_97aca1a74df045a4c9b18c54fca83ad7.bindTooltip(
+                `<div>
+                     📍 Pahou  ·  2 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a9d7c142cdda2b1cba60084060029ffd = L.circleMarker(
+                [10.2283, 2.66335],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_0ca814c14e6ef4eef03c22d27d3d4121 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_6144027c3fb0861387c62e95d8b5815d = $(`<div id="html_6144027c3fb0861387c62e95d8b5815d" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Bembereke</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>2</b> événements<br>         📊 Goldstein : <b>-1.3</b>     </div>     </div>`)[0];
+                popup_0ca814c14e6ef4eef03c22d27d3d4121.setContent(html_6144027c3fb0861387c62e95d8b5815d);
+            
+        
+
+        circle_marker_a9d7c142cdda2b1cba60084060029ffd.bindPopup(popup_0ca814c14e6ef4eef03c22d27d3d4121)
+        ;
+
+        
+    
+    
+            circle_marker_a9d7c142cdda2b1cba60084060029ffd.bindTooltip(
+                `<div>
+                     📍 Bembereke  ·  2 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d82b8c742277be96176012d6f08afd7d = L.circleMarker(
+                [10.9242, 3.47184],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F5A800", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_dd21e1be627103f5c7e370f5a309b4f6 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_64427fd2b85d21064f8a29459d10b6f8 = $(`<div id="html_64427fd2b85d21064f8a29459d10b6f8" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Gbeke</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🟡 <b>Cooperation</b><br>         🗓 <b>2</b> événements<br>         📊 Goldstein : <b>3.4</b>     </div>     </div>`)[0];
+                popup_dd21e1be627103f5c7e370f5a309b4f6.setContent(html_64427fd2b85d21064f8a29459d10b6f8);
+            
+        
+
+        circle_marker_d82b8c742277be96176012d6f08afd7d.bindPopup(popup_dd21e1be627103f5c7e370f5a309b4f6)
+        ;
+
+        
+    
+    
+            circle_marker_d82b8c742277be96176012d6f08afd7d.bindTooltip(
+                `<div>
+                     📍 Gbeke  ·  2 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9edfddbc33d0b6c123080fbb2a6e1d54 = L.circleMarker(
+                [6.55, 2.33333],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_939837223d37b42ce8c1cfacca0c2326 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_a9d14bcc25ae7fb1c5551c8d80becaa2 = $(`<div id="html_a9d14bcc25ae7fb1c5551c8d80becaa2" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Golo-Djigbe</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>2</b> événements<br>         📊 Goldstein : <b>-6.0</b>     </div>     </div>`)[0];
+                popup_939837223d37b42ce8c1cfacca0c2326.setContent(html_a9d14bcc25ae7fb1c5551c8d80becaa2);
+            
+        
+
+        circle_marker_9edfddbc33d0b6c123080fbb2a6e1d54.bindPopup(popup_939837223d37b42ce8c1cfacca0c2326)
+        ;
+
+        
+    
+    
+            circle_marker_9edfddbc33d0b6c123080fbb2a6e1d54.bindTooltip(
+                `<div>
+                     📍 Golo-Djigbe  ·  2 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_dabe196435cc9cd2580b8c0b5875a421 = L.circleMarker(
+                [6.64873, 2.73417],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F5A800", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_6c62f93c2b21ee3cdbc0f83d95ddffd2 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_7ff80018b0962542e46e1793a7c81fd0 = $(`<div id="html_7ff80018b0962542e46e1793a7c81fd0" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Igolo</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🟡 <b>Cooperation</b><br>         🗓 <b>2</b> événements<br>         📊 Goldstein : <b>1.0</b>     </div>     </div>`)[0];
+                popup_6c62f93c2b21ee3cdbc0f83d95ddffd2.setContent(html_7ff80018b0962542e46e1793a7c81fd0);
+            
+        
+
+        circle_marker_dabe196435cc9cd2580b8c0b5875a421.bindPopup(popup_6c62f93c2b21ee3cdbc0f83d95ddffd2)
+        ;
+
+        
+    
+    
+            circle_marker_dabe196435cc9cd2580b8c0b5875a421.bindTooltip(
+                `<div>
+                     📍 Igolo  ·  2 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6a843b6e82e605f01f747d357f489d82 = L.circleMarker(
+                [11.894, 2.93418],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_73a02d8d10bf2df5f9555539c1fb59bd = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_4baec72b98d9f6fde9a65d6a8ef1008c = $(`<div id="html_4baec72b98d9f6fde9a65d6a8ef1008c" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Koura</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>2</b> événements<br>         📊 Goldstein : <b>-10.0</b>     </div>     </div>`)[0];
+                popup_73a02d8d10bf2df5f9555539c1fb59bd.setContent(html_4baec72b98d9f6fde9a65d6a8ef1008c);
+            
+        
+
+        circle_marker_6a843b6e82e605f01f747d357f489d82.bindPopup(popup_73a02d8d10bf2df5f9555539c1fb59bd)
+        ;
+
+        
+    
+    
+            circle_marker_6a843b6e82e605f01f747d357f489d82.bindTooltip(
+                `<div>
+                     📍 Koura  ·  2 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d053270eed253a3a8802bf6745af6c7a = L.circleMarker(
+                [10.4482, 2.45031],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_332b2b99fc6e59b69507286488d12155 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_824910e04e4e459e95e3255bd582b035 = $(`<div id="html_824910e04e4e459e95e3255bd582b035" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Sekere</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>2</b> événements<br>         📊 Goldstein : <b>-2.0</b>     </div>     </div>`)[0];
+                popup_332b2b99fc6e59b69507286488d12155.setContent(html_824910e04e4e459e95e3255bd582b035);
+            
+        
+
+        circle_marker_d053270eed253a3a8802bf6745af6c7a.bindPopup(popup_332b2b99fc6e59b69507286488d12155)
+        ;
+
+        
+    
+    
+            circle_marker_d053270eed253a3a8802bf6745af6c7a.bindTooltip(
+                `<div>
+                     📍 Sekere  ·  2 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f237087b58ae31ccf5f53893b29a923b = L.circleMarker(
+                [6.33333, 1.85],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F5A800", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_13cf38f46d6479b6c8f260a90493dad2 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_0cbeffd1d848e37c2033752b7c0eb0d8 = $(`<div id="html_0cbeffd1d848e37c2033752b7c0eb0d8" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Gbehoue</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🟡 <b>Cooperation</b><br>         🗓 <b>1</b> événements<br>         📊 Goldstein : <b>1.9</b>     </div>     </div>`)[0];
+                popup_13cf38f46d6479b6c8f260a90493dad2.setContent(html_0cbeffd1d848e37c2033752b7c0eb0d8);
+            
+        
+
+        circle_marker_f237087b58ae31ccf5f53893b29a923b.bindPopup(popup_13cf38f46d6479b6c8f260a90493dad2)
+        ;
+
+        
+    
+    
+            circle_marker_f237087b58ae31ccf5f53893b29a923b.bindTooltip(
+                `<div>
+                     📍 Gbehoue  ·  1 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b88a5df8271146cfd795d66bffc0c445 = L.circleMarker(
+                [11.1734, 2.4085],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_03769cec6a55fd9f0e0945a8b38f045e = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_77813a6dbb54557bae543c93ed932be1 = $(`<div id="html_77813a6dbb54557bae543c93ed932be1" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Angaradebou</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>1</b> événements<br>         📊 Goldstein : <b>-2.0</b>     </div>     </div>`)[0];
+                popup_03769cec6a55fd9f0e0945a8b38f045e.setContent(html_77813a6dbb54557bae543c93ed932be1);
+            
+        
+
+        circle_marker_b88a5df8271146cfd795d66bffc0c445.bindPopup(popup_03769cec6a55fd9f0e0945a8b38f045e)
+        ;
+
+        
+    
+    
+            circle_marker_b88a5df8271146cfd795d66bffc0c445.bindTooltip(
+                `<div>
+                     📍 Angaradebou  ·  1 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d4098ab80a622957d0cbc863b8fb209c = L.circleMarker(
+                [6.29386, 1.89178],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F5A800", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_bb0a8022bff9fce3779531e4b15ac58e = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_5c71371688b374fc8f02105ee13cde10 = $(`<div id="html_5c71371688b374fc8f02105ee13cde10" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Avlo</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🟡 <b>Cooperation</b><br>         🗓 <b>1</b> événements<br>         📊 Goldstein : <b>2.8</b>     </div>     </div>`)[0];
+                popup_bb0a8022bff9fce3779531e4b15ac58e.setContent(html_5c71371688b374fc8f02105ee13cde10);
+            
+        
+
+        circle_marker_d4098ab80a622957d0cbc863b8fb209c.bindPopup(popup_bb0a8022bff9fce3779531e4b15ac58e)
+        ;
+
+        
+    
+    
+            circle_marker_d4098ab80a622957d0cbc863b8fb209c.bindTooltip(
+                `<div>
+                     📍 Avlo  ·  1 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_230128743b97905eb1573c28ee59895b = L.circleMarker(
+                [10.2175, 3.13065],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F5A800", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_e29d8c25084f31df9774c1758537f28e = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_e4a2546c8cbd2e91b62f87e1358fdb11 = $(`<div id="html_e4a2546c8cbd2e91b62f87e1358fdb11" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Bouca</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🟡 <b>Cooperation</b><br>         🗓 <b>1</b> événements<br>         📊 Goldstein : <b>0.0</b>     </div>     </div>`)[0];
+                popup_e29d8c25084f31df9774c1758537f28e.setContent(html_e4a2546c8cbd2e91b62f87e1358fdb11);
+            
+        
+
+        circle_marker_230128743b97905eb1573c28ee59895b.bindPopup(popup_e29d8c25084f31df9774c1758537f28e)
+        ;
+
+        
+    
+    
+            circle_marker_230128743b97905eb1573c28ee59895b.bindTooltip(
+                `<div>
+                     📍 Bouca  ·  1 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a02d5387ab7a61e6df4a3060b7b5725f = L.circleMarker(
+                [10.5416, 2.72824],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_25c8480d6f380db3e112b8a65a910861 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_9ca90db518e93c8b932333ca53f6bb3b = $(`<div id="html_9ca90db518e93c8b932333ca53f6bb3b" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Beroubouay</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>1</b> événements<br>         📊 Goldstein : <b>-2.0</b>     </div>     </div>`)[0];
+                popup_25c8480d6f380db3e112b8a65a910861.setContent(html_9ca90db518e93c8b932333ca53f6bb3b);
+            
+        
+
+        circle_marker_a02d5387ab7a61e6df4a3060b7b5725f.bindPopup(popup_25c8480d6f380db3e112b8a65a910861)
+        ;
+
+        
+    
+    
+            circle_marker_a02d5387ab7a61e6df4a3060b7b5725f.bindTooltip(
+                `<div>
+                     📍 Beroubouay  ·  1 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_00c672be1212fe9cc0ae535588f28862 = L.circleMarker(
+                [10.1966, 1.5994],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F5A800", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_4ca0b3fdd7ba9102ffe5cc2bbc60cb4c = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_c94bbab62b666d0688962e75f00129c3 = $(`<div id="html_c94bbab62b666d0688962e75f00129c3" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Nioro</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🟡 <b>Cooperation</b><br>         🗓 <b>1</b> événements<br>         📊 Goldstein : <b>5.0</b>     </div>     </div>`)[0];
+                popup_4ca0b3fdd7ba9102ffe5cc2bbc60cb4c.setContent(html_c94bbab62b666d0688962e75f00129c3);
+            
+        
+
+        circle_marker_00c672be1212fe9cc0ae535588f28862.bindPopup(popup_4ca0b3fdd7ba9102ffe5cc2bbc60cb4c)
+        ;
+
+        
+    
+    
+            circle_marker_00c672be1212fe9cc0ae535588f28862.bindTooltip(
+                `<div>
+                     📍 Nioro  ·  1 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e5b364f3b346e55c42e93dea1e3490df = L.circleMarker(
+                [9.80481, 2.43961],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_8a52d8e5ead7f7a421c9caa313479348 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_7b7d8b854639eccb28e78edef462880f = $(`<div id="html_7b7d8b854639eccb28e78edef462880f" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Maregourou</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>1</b> événements<br>         📊 Goldstein : <b>-2.0</b>     </div>     </div>`)[0];
+                popup_8a52d8e5ead7f7a421c9caa313479348.setContent(html_7b7d8b854639eccb28e78edef462880f);
+            
+        
+
+        circle_marker_e5b364f3b346e55c42e93dea1e3490df.bindPopup(popup_8a52d8e5ead7f7a421c9caa313479348)
+        ;
+
+        
+    
+    
+            circle_marker_e5b364f3b346e55c42e93dea1e3490df.bindTooltip(
+                `<div>
+                     📍 Maregourou  ·  1 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9818c8ac3bf3f7bb2babc059e1a84637 = L.circleMarker(
+                [10.7839, 2.71315],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F5A800", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_e48d006f04d6e233f954c842cd76a1db = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_b05aad31f7f0594773bed6fe4e62afed = $(`<div id="html_b05aad31f7f0594773bed6fe4e62afed" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Kerou</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🟡 <b>Cooperation</b><br>         🗓 <b>1</b> événements<br>         📊 Goldstein : <b>0.4</b>     </div>     </div>`)[0];
+                popup_e48d006f04d6e233f954c842cd76a1db.setContent(html_b05aad31f7f0594773bed6fe4e62afed);
+            
+        
+
+        circle_marker_9818c8ac3bf3f7bb2babc059e1a84637.bindPopup(popup_e48d006f04d6e233f954c842cd76a1db)
+        ;
+
+        
+    
+    
+            circle_marker_9818c8ac3bf3f7bb2babc059e1a84637.bindTooltip(
+                `<div>
+                     📍 Kerou  ·  1 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e87cba2fe5158e3d3c42d4f43cd058d9 = L.circleMarker(
+                [9.73606, 2.64774],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F5A800", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_c0a315bf5b3400fb985eb9ddcb62f391 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_13cb8e2cb3c84d16e7047fbf25ced102 = $(`<div id="html_13cb8e2cb3c84d16e7047fbf25ced102" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Kokou</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🟡 <b>Cooperation</b><br>         🗓 <b>1</b> événements<br>         📊 Goldstein : <b>0.0</b>     </div>     </div>`)[0];
+                popup_c0a315bf5b3400fb985eb9ddcb62f391.setContent(html_13cb8e2cb3c84d16e7047fbf25ced102);
+            
+        
+
+        circle_marker_e87cba2fe5158e3d3c42d4f43cd058d9.bindPopup(popup_c0a315bf5b3400fb985eb9ddcb62f391)
+        ;
+
+        
+    
+    
+            circle_marker_e87cba2fe5158e3d3c42d4f43cd058d9.bindTooltip(
+                `<div>
+                     📍 Kokou  ·  1 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4c368433926401d45a34d6840f36e062 = L.circleMarker(
+                [6.28036, 1.82251],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F5A800", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_1adf57e518d84203a81e8acfdd728b4d = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_aa18caed1e854f689eef3e7db734bfcc = $(`<div id="html_aa18caed1e854f689eef3e7db734bfcc" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Grand Popo</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🟡 <b>Cooperation</b><br>         🗓 <b>1</b> événements<br>         📊 Goldstein : <b>3.0</b>     </div>     </div>`)[0];
+                popup_1adf57e518d84203a81e8acfdd728b4d.setContent(html_aa18caed1e854f689eef3e7db734bfcc);
+            
+        
+
+        circle_marker_4c368433926401d45a34d6840f36e062.bindPopup(popup_1adf57e518d84203a81e8acfdd728b4d)
+        ;
+
+        
+    
+    
+            circle_marker_4c368433926401d45a34d6840f36e062.bindTooltip(
+                `<div>
+                     📍 Grand Popo  ·  1 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_045e4e25241e7d9904513e6ac7257141 = L.circleMarker(
+                [9.78492, 2.63669],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F5A800", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_1ea46ed149749e5294fff907a811fb14 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_5a293d99176b1345d4ccccac5aa9cfcc = $(`<div id="html_5a293d99176b1345d4ccccac5aa9cfcc" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Ouenou</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🟡 <b>Cooperation</b><br>         🗓 <b>1</b> événements<br>         📊 Goldstein : <b>0.0</b>     </div>     </div>`)[0];
+                popup_1ea46ed149749e5294fff907a811fb14.setContent(html_5a293d99176b1345d4ccccac5aa9cfcc);
+            
+        
+
+        circle_marker_045e4e25241e7d9904513e6ac7257141.bindPopup(popup_1ea46ed149749e5294fff907a811fb14)
+        ;
+
+        
+    
+    
+            circle_marker_045e4e25241e7d9904513e6ac7257141.bindTooltip(
+                `<div>
+                     📍 Ouenou  ·  1 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b50ab14e5c94f2325b69961b50e0fc0b = L.circleMarker(
+                [10.2275, 2.00192],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F5A800", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_a4790b1b4b81d9c856950e44f070bb5b = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_b505bda4de2d2b52580f773fbdc1084f = $(`<div id="html_b505bda4de2d2b52580f773fbdc1084f" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Pehunco</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🟡 <b>Cooperation</b><br>         🗓 <b>1</b> événements<br>         📊 Goldstein : <b>4.0</b>     </div>     </div>`)[0];
+                popup_a4790b1b4b81d9c856950e44f070bb5b.setContent(html_b505bda4de2d2b52580f773fbdc1084f);
+            
+        
+
+        circle_marker_b50ab14e5c94f2325b69961b50e0fc0b.bindPopup(popup_a4790b1b4b81d9c856950e44f070bb5b)
+        ;
+
+        
+    
+    
+            circle_marker_b50ab14e5c94f2325b69961b50e0fc0b.bindTooltip(
+                `<div>
+                     📍 Pehunco  ·  1 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9619670934cb7a262961b9b861fcc9f2 = L.circleMarker(
+                [6.91667, 1.8],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_82d0f9ff88fb08960b3871d8623f6e47 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_4b3c9872a463b91b97a8045aeaa4dede = $(`<div id="html_4b3c9872a463b91b97a8045aeaa4dede" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Podji</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>1</b> événements<br>         📊 Goldstein : <b>-5.0</b>     </div>     </div>`)[0];
+                popup_82d0f9ff88fb08960b3871d8623f6e47.setContent(html_4b3c9872a463b91b97a8045aeaa4dede);
+            
+        
+
+        circle_marker_9619670934cb7a262961b9b861fcc9f2.bindPopup(popup_82d0f9ff88fb08960b3871d8623f6e47)
+        ;
+
+        
+    
+    
+            circle_marker_9619670934cb7a262961b9b861fcc9f2.bindTooltip(
+                `<div>
+                     📍 Podji  ·  1 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e4f1c270223ecb6694ca09bfe1eaa000 = L.circleMarker(
+                [10.9282, 3.69429],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F5A800", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_a8e0d60d66228dba22d9563c9608ae69 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_84214b579ac8aca3bf4677196e782606 = $(`<div id="html_84214b579ac8aca3bf4677196e782606" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Segbana</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🟡 <b>Cooperation</b><br>         🗓 <b>1</b> événements<br>         📊 Goldstein : <b>5.0</b>     </div>     </div>`)[0];
+                popup_a8e0d60d66228dba22d9563c9608ae69.setContent(html_84214b579ac8aca3bf4677196e782606);
+            
+        
+
+        circle_marker_e4f1c270223ecb6694ca09bfe1eaa000.bindPopup(popup_a8e0d60d66228dba22d9563c9608ae69)
+        ;
+
+        
+    
+    
+            circle_marker_e4f1c270223ecb6694ca09bfe1eaa000.bindTooltip(
+                `<div>
+                     📍 Segbana  ·  1 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_639e1b24766c38eca5d512964dbe1697 = L.circleMarker(
+                [6.52686, 1.8233],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F5A800", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_eada3b7bb4b13d97ebec317f15d5c964 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_db225eea1d37055bbb4bc111a0f7fcde = $(`<div id="html_db225eea1d37055bbb4bc111a0f7fcde" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Segbo</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🟡 <b>Cooperation</b><br>         🗓 <b>1</b> événements<br>         📊 Goldstein : <b>0.4</b>     </div>     </div>`)[0];
+                popup_eada3b7bb4b13d97ebec317f15d5c964.setContent(html_db225eea1d37055bbb4bc111a0f7fcde);
+            
+        
+
+        circle_marker_639e1b24766c38eca5d512964dbe1697.bindPopup(popup_eada3b7bb4b13d97ebec317f15d5c964)
+        ;
+
+        
+    
+    
+            circle_marker_639e1b24766c38eca5d512964dbe1697.bindTooltip(
+                `<div>
+                     📍 Segbo  ·  1 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5e46ba3ec329ea7b3ff3f368aafb52ec = L.circleMarker(
+                [6.73618, 2.65866],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F5A800", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_415420b76e9106b59cd054bcec183ef4 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_9ace65d5432523b88921fcd6a086f372 = $(`<div id="html_9ace65d5432523b88921fcd6a086f372" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Sakete</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🟡 <b>Cooperation</b><br>         🗓 <b>1</b> événements<br>         📊 Goldstein : <b>4.0</b>     </div>     </div>`)[0];
+                popup_415420b76e9106b59cd054bcec183ef4.setContent(html_9ace65d5432523b88921fcd6a086f372);
+            
+        
+
+        circle_marker_5e46ba3ec329ea7b3ff3f368aafb52ec.bindPopup(popup_415420b76e9106b59cd054bcec183ef4)
+        ;
+
+        
+    
+    
+            circle_marker_5e46ba3ec329ea7b3ff3f368aafb52ec.bindTooltip(
+                `<div>
+                     📍 Sakete  ·  1 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b8b3be773fb752f3ec9a9c817a536e9c = L.circleMarker(
+                [9.09416, 2.8869],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F5A800", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_a4edd59d511f1c5adf500a7b2052368e = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_43dc6280ee6add8cf6f7dd2de0ee36fd = $(`<div id="html_43dc6280ee6add8cf6f7dd2de0ee36fd" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Tandu</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🟡 <b>Cooperation</b><br>         🗓 <b>1</b> événements<br>         📊 Goldstein : <b>4.0</b>     </div>     </div>`)[0];
+                popup_a4edd59d511f1c5adf500a7b2052368e.setContent(html_43dc6280ee6add8cf6f7dd2de0ee36fd);
+            
+        
+
+        circle_marker_b8b3be773fb752f3ec9a9c817a536e9c.bindPopup(popup_a4edd59d511f1c5adf500a7b2052368e)
+        ;
+
+        
+    
+    
+            circle_marker_b8b3be773fb752f3ec9a9c817a536e9c.bindTooltip(
+                `<div>
+                     📍 Tandu  ·  1 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_bd1dd535d73e096afec06553828cd617 = L.circleMarker(
+                [9.12273, 2.56099],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F5A800", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_7913ced5513253d6aaf85d20a3eac0e9 = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_8768da34abc74f2882c6d66f37191abf = $(`<div id="html_8768da34abc74f2882c6d66f37191abf" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Tchatchou</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🟡 <b>Cooperation</b><br>         🗓 <b>1</b> événements<br>         📊 Goldstein : <b>7.0</b>     </div>     </div>`)[0];
+                popup_7913ced5513253d6aaf85d20a3eac0e9.setContent(html_8768da34abc74f2882c6d66f37191abf);
+            
+        
+
+        circle_marker_bd1dd535d73e096afec06553828cd617.bindPopup(popup_7913ced5513253d6aaf85d20a3eac0e9)
+        ;
+
+        
+    
+    
+            circle_marker_bd1dd535d73e096afec06553828cd617.bindTooltip(
+                `<div>
+                     📍 Tchatchou  ·  1 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6fe9c89a61af31db6116df8443323cb8 = L.circleMarker(
+                [10.3496, 2.37906],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F5A800", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_6ea2d3c6dbc5a68ef7676707e08052eb = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_93d9b842906da24a1702a47a695a30ac = $(`<div id="html_93d9b842906da24a1702a47a695a30ac" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Sinande</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🟡 <b>Cooperation</b><br>         🗓 <b>1</b> événements<br>         📊 Goldstein : <b>0.0</b>     </div>     </div>`)[0];
+                popup_6ea2d3c6dbc5a68ef7676707e08052eb.setContent(html_93d9b842906da24a1702a47a695a30ac);
+            
+        
+
+        circle_marker_6fe9c89a61af31db6116df8443323cb8.bindPopup(popup_6ea2d3c6dbc5a68ef7676707e08052eb)
+        ;
+
+        
+    
+    
+            circle_marker_6fe9c89a61af31db6116df8443323cb8.bindTooltip(
+                `<div>
+                     📍 Sinande  ·  1 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_bcf9bc4f0f902e9054e43433eff4f7cc = L.circleMarker(
+                [9.58174, 1.43861],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E45756", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_40ac9ea1f1a620219dd43b8e57268f3a = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_05a5c2330e5f0d83f384aa96ef5c416a = $(`<div id="html_05a5c2330e5f0d83f384aa96ef5c416a" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Songo</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🔴 <b>Conflict</b><br>         🗓 <b>1</b> événements<br>         📊 Goldstein : <b>-4.4</b>     </div>     </div>`)[0];
+                popup_40ac9ea1f1a620219dd43b8e57268f3a.setContent(html_05a5c2330e5f0d83f384aa96ef5c416a);
+            
+        
+
+        circle_marker_bcf9bc4f0f902e9054e43433eff4f7cc.bindPopup(popup_40ac9ea1f1a620219dd43b8e57268f3a)
+        ;
+
+        
+    
+    
+            circle_marker_bcf9bc4f0f902e9054e43433eff4f7cc.bindTooltip(
+                `<div>
+                     📍 Songo  ·  1 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6f21e19663bc12b873c38c5030a18d4a = L.circleMarker(
+                [6.88935, 1.83722],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F5A800", "fillOpacity": 0.82, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(map_6935a9ea5eb75ada61d8bc3b668a03fb);
+        
+    
+        var popup_a62eda07fa7ce68000f8c400167e131f = L.popup({
+  "maxWidth": 240,
+});
+
+        
+            
+                var html_30c547c7e679050bbc404fe58282ca4e = $(`<div id="html_30c547c7e679050bbc404fe58282ca4e" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:180px;">         <b style="font-size:14px;">Toviklin</b><br>         <hr style="margin:4px 0;border-color:#eee;">         🟡 <b>Cooperation</b><br>         🗓 <b>1</b> événements<br>         📊 Goldstein : <b>3.4</b>     </div>     </div>`)[0];
+                popup_a62eda07fa7ce68000f8c400167e131f.setContent(html_30c547c7e679050bbc404fe58282ca4e);
+            
+        
+
+        circle_marker_6f21e19663bc12b873c38c5030a18d4a.bindPopup(popup_a62eda07fa7ce68000f8c400167e131f)
+        ;
+
+        
+    
+    
+            circle_marker_6f21e19663bc12b873c38c5030a18d4a.bindTooltip(
+                `<div>
+                     📍 Toviklin  ·  1 évts
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+</script>
+</html>
