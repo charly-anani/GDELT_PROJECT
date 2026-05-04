@@ -10,15 +10,19 @@ __pycache__/
 # Notebook artifacts
 .ipynb_checkpoints/
 
-# Data exports
+# Data
 *.csv
 *.csv.gz
-*.tsv
-
-data/raw/
 
 # OS files
 .DS_Store
+
+# Google Cloud credentials
+*.json
+
+# Cache
+cache/
+
 
 models/*.pkl
 models/*.joblib
