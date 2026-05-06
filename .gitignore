@@ -17,7 +17,7 @@ __pycache__/
 # OS files
 .DS_Store
 
-# Google Cloud credentials
+# Google Cloud credentialss
 .json
 
 # Cache
