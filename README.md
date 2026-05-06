@@ -270,3 +270,7 @@ Le projet peut se résumer en une chaîne analytique complète :
 **GDELT brut → BigQuery nettoyé/enrichi → exploration descriptive → feature engineering temporel → target future anti-leakage → Random Forest → métriques business → carte des hotspots de risque.**
 
 Cette logique montre bien que le projet ne se limite pas à une visualisation exploratoire : il met en place une vraie **chaîne data analytique et prédictive** appliquée au suivi des événements médiatisés au Bénin.
+
+
+
+L'IA a ete utilsier au sein d enotre projet
