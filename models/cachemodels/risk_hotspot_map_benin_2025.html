@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_d96ee4bd4b2d7f2da4cd712e222fb9d4 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdn.jsdelivr.net/gh/python-visualization/folium@main/folium/templates/leaflet_heat.min.js"></script>
+</head>
+<body>
+    
+    
+<div style="position:fixed; bottom:30px; left:30px; z-index:9999;
+    background:rgba(255,255,255,0.97); color:#1f2937;
+    padding:16px 20px; border-radius:12px;
+    font-family:Inter,sans-serif; font-size:13px;
+    border:1px solid #e5e7eb; box-shadow:0 4px 20px rgba(0,0,0,0.15);
+    max-width:320px;">
+    <b style="font-size:15px;display:block;margin-bottom:10px;">
+        Risque predit J+7 — Benin 2025
+    </b>
+    <span style="color:#27ae60;font-size:18px;">●</span>&nbsp;Low Risk<br>
+    <span style="color:#f39c12;font-size:18px;">●</span>&nbsp;Medium Risk<br>
+    <span style="color:#e74c3c;font-size:18px;">●</span>&nbsp;High Risk<br>
+    <div style="margin-top:10px;padding-top:10px;border-top:1px solid #e5e7eb;
+                color:#6b7280;font-size:11px;line-height:1.5;">
+        <b>Modele ML :</b> Random Forest (forecasting 7j)<br>
+        Probabilite d'un evenement grave dans les 7 prochains jours<br>
+        Taille = volume d'evenements observes<br>
+        Cliquer sur un point pour les details
+    </div>
+    <div style="margin-top:12px;padding-top:10px;border-top:1px solid #e5e7eb;">
+        <b style="font-size:12px;color:#374151;">Repartition par niveau de risque</b>
+        <table style="width:100%;margin-top:8px;border-collapse:collapse;">
+            <thead><tr style="background:#f9fafb;">
+                <th style="padding:4px 8px;font-size:10px;text-align:left;color:#6b7280;">Niveau</th>
+                <th style="padding:4px 8px;font-size:10px;text-align:center;color:#6b7280;">Dep.</th>
+                <th style="padding:4px 8px;font-size:10px;text-align:center;color:#6b7280;">Risque</th>
+                <th style="padding:4px 8px;font-size:10px;text-align:center;color:#6b7280;">Evts</th>
+            </tr></thead>
+            <tbody>
+        <tr>
+            <td style="padding:4px 8px;font-size:11px;font-weight:600;color:#e74c3c;">High</td>
+            <td style="padding:4px 8px;font-size:11px;text-align:center;">2</td>
+            <td style="padding:4px 8px;font-size:11px;text-align:center;color:#e74c3c;font-weight:700;">75.6%</td>
+            <td style="padding:4px 8px;font-size:11px;text-align:center;">35</td>
+        </tr>
+        <tr>
+            <td style="padding:4px 8px;font-size:11px;font-weight:600;color:#f39c12;">Medium</td>
+            <td style="padding:4px 8px;font-size:11px;text-align:center;">3</td>
+            <td style="padding:4px 8px;font-size:11px;text-align:center;color:#f39c12;font-weight:700;">51.6%</td>
+            <td style="padding:4px 8px;font-size:11px;text-align:center;">122</td>
+        </tr>
+        <tr>
+            <td style="padding:4px 8px;font-size:11px;font-weight:600;color:#27ae60;">Low</td>
+            <td style="padding:4px 8px;font-size:11px;text-align:center;">3</td>
+            <td style="padding:4px 8px;font-size:11px;text-align:center;color:#27ae60;font-weight:700;">24.9%</td>
+            <td style="padding:4px 8px;font-size:11px;text-align:center;">11</td>
+        </tr>
+        <tr style="background:#f9fafb;border-top:1px dashed #d1d5db;">
+            <td colspan="4" style="padding:4px 8px;font-size:10px;color:#6b7280;font-style:italic;">
+                + Evenements non localises : <b>4235</b> evts (62.2% risk)
+            </td>
+        </tr></tbody>
+        </table>
+    </div>
+    <div style="margin-top:12px;padding-top:10px;border-top:1px solid #e5e7eb;">
+        <b style="font-size:12px;color:#e74c3c;">Top 3 departements sensibles</b>
+        <table style="width:100%;margin-top:8px;border-collapse:collapse;">
+            <thead><tr style="background:#fff5f5;">
+                <th style="padding:4px 8px;font-size:10px;text-align:left;color:#e74c3c;">Departement</th>
+                <th style="padding:4px 8px;font-size:10px;text-align:center;color:#e74c3c;">Risk</th>
+                <th style="padding:4px 8px;font-size:10px;text-align:center;color:#e74c3c;">Evts</th>
+            </tr></thead>
+            <tbody>
+    <tr style="background:#fff5f5;">
+        <td style="padding:4px 8px;font-size:11px;font-weight:600;color:#e74c3c;">Atakora</td>
+        <td style="padding:4px 8px;font-size:11px;text-align:center;color:#e74c3c;font-weight:700;">78.1%</td>
+        <td style="padding:4px 8px;font-size:11px;text-align:center;">10</td>
+    </tr>
+    <tr style="background:#fff5f5;">
+        <td style="padding:4px 8px;font-size:11px;font-weight:600;color:#e74c3c;">Borgou</td>
+        <td style="padding:4px 8px;font-size:11px;text-align:center;color:#e74c3c;font-weight:700;">73.0%</td>
+        <td style="padding:4px 8px;font-size:11px;text-align:center;">25</td>
+    </tr>
+    <tr style="background:#fff5f5;">
+        <td style="padding:4px 8px;font-size:11px;font-weight:600;color:#f39c12;">Alibori</td>
+        <td style="padding:4px 8px;font-size:11px;text-align:center;color:#f39c12;font-weight:700;">59.7%</td>
+        <td style="padding:4px 8px;font-size:11px;text-align:center;">2</td>
+    </tr></tbody>
+        </table>
+    </div>
+    <div style="margin-top:10px;font-size:9px;color:#9ca3af;font-style:italic;text-align:center;">
+        Early Warning System — ML Prediction<br>
+        8 departements analyses
+    </div>
+</div>
+    
+            <div class="folium-map" id="map_d96ee4bd4b2d7f2da4cd712e222fb9d4" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_d96ee4bd4b2d7f2da4cd712e222fb9d4 = L.map(
+                "map_d96ee4bd4b2d7f2da4cd712e222fb9d4",
+                {
+                    center: [8.260010000000001, 2.038125],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 7,
+  "zoomControl": true,
+  "preferCanvas": true,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_e71da31003efb5bb3dd472ec05561773 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_e71da31003efb5bb3dd472ec05561773.addTo(map_d96ee4bd4b2d7f2da4cd712e222fb9d4);
+        
+    
+            var heat_map_2f0d0dfcc297707eded731af001f2adc = L.heatLayer(
+                [[11.1342, 2.93861, 0.5968204209833192], [10.6212, 1.37962, 0.7813248020081799], [6.36307, 2.08506, 0.3768504014375181], [9.33716, 2.63031, 0.7301457291741769], [7.08333, 1.83333, 0.09345441754781329], [9.70853, 1.66598, 0.32586648155814757], [6.48333, 2.61667, 0.5738288294595273], [7.18286, 1.99119, 0.3270668775012624]],
+                {
+  "minOpacity": 0.3,
+  "maxZoom": 18,
+  "radius": 20,
+  "blur": 18,
+  "gradient": {
+  "0.0": "#27ae60",
+  "0.33": "#f39c12",
+  "0.66": "#e74c3c",
+  "1.0": "#c0392b",
+},
+}
+            );
+        
+    
+            heat_map_2f0d0dfcc297707eded731af001f2adc.addTo(map_d96ee4bd4b2d7f2da4cd712e222fb9d4);
+        
+    
+            var circle_marker_484f6175d1057199d18c6ea8713128e7 = L.circleMarker(
+                [11.1342, 2.93861],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#f39c12", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(map_d96ee4bd4b2d7f2da4cd712e222fb9d4);
+        
+    
+        var popup_4bbc8b5182366411dc6b8b95e65deab1 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_6478836a852df38d9554fdca93b35870 = $(`<div id="html_6478836a852df38d9554fdca93b35870" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:220px;">         <b style="font-size:15px;color:#1f2937;">Alibori</b><br>         <span style="font-size:10px;color:#9ca3af;">BN07</span>         <hr style="margin:6px 0;border-color:#e5e7eb;">         <b style="color:#f39c12;font-size:13px;">Risque Medium</b><br>         <div style="margin-top:6px;color:#6b7280;font-size:12px;">             <b>2</b> evenements analyses<br>             Probabilite conflit J+7 : <b style="color:#f39c12;">59.7%</b>         </div>     </div>     </div>`)[0];
+                popup_4bbc8b5182366411dc6b8b95e65deab1.setContent(html_6478836a852df38d9554fdca93b35870);
+            
+        
+
+        circle_marker_484f6175d1057199d18c6ea8713128e7.bindPopup(popup_4bbc8b5182366411dc6b8b95e65deab1)
+        ;
+
+        
+    
+    
+            circle_marker_484f6175d1057199d18c6ea8713128e7.bindTooltip(
+                `<div>
+                     Alibori — Risque J+7 : 59.7%
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c331be388b4eaa428fe248b2fc44e9dc = L.circleMarker(
+                [10.6212, 1.37962],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#e74c3c", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.0, "stroke": true, "weight": 1.5}
+            ).addTo(map_d96ee4bd4b2d7f2da4cd712e222fb9d4);
+        
+    
+        var popup_8ceedba411f404aed3cb3255a6720796 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_c11046d42f6060f44286904cb530e27c = $(`<div id="html_c11046d42f6060f44286904cb530e27c" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:220px;">         <b style="font-size:15px;color:#1f2937;">Atakora</b><br>         <span style="font-size:10px;color:#9ca3af;">BN08</span>         <hr style="margin:6px 0;border-color:#e5e7eb;">         <b style="color:#e74c3c;font-size:13px;">Risque High</b><br>         <div style="margin-top:6px;color:#6b7280;font-size:12px;">             <b>10</b> evenements analyses<br>             Probabilite conflit J+7 : <b style="color:#e74c3c;">78.1%</b>         </div>     </div>     </div>`)[0];
+                popup_8ceedba411f404aed3cb3255a6720796.setContent(html_c11046d42f6060f44286904cb530e27c);
+            
+        
+
+        circle_marker_c331be388b4eaa428fe248b2fc44e9dc.bindPopup(popup_8ceedba411f404aed3cb3255a6720796)
+        ;
+
+        
+    
+    
+            circle_marker_c331be388b4eaa428fe248b2fc44e9dc.bindTooltip(
+                `<div>
+                     Atakora — Risque J+7 : 78.1%
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ef26913555536a38446dff0ad0256c5a = L.circleMarker(
+                [6.36307, 2.08506],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#f39c12", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.6, "stroke": true, "weight": 1.5}
+            ).addTo(map_d96ee4bd4b2d7f2da4cd712e222fb9d4);
+        
+    
+        var popup_2a1b856fb91ce4eb02a271c37c5f10d1 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_8fa6a886707954ded30dfbfbe1e0a231 = $(`<div id="html_8fa6a886707954ded30dfbfbe1e0a231" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:220px;">         <b style="font-size:15px;color:#1f2937;">Atlantique</b><br>         <span style="font-size:10px;color:#9ca3af;">BN09</span>         <hr style="margin:6px 0;border-color:#e5e7eb;">         <b style="color:#f39c12;font-size:13px;">Risque Medium</b><br>         <div style="margin-top:6px;color:#6b7280;font-size:12px;">             <b>22</b> evenements analyses<br>             Probabilite conflit J+7 : <b style="color:#f39c12;">37.7%</b>         </div>     </div>     </div>`)[0];
+                popup_2a1b856fb91ce4eb02a271c37c5f10d1.setContent(html_8fa6a886707954ded30dfbfbe1e0a231);
+            
+        
+
+        circle_marker_ef26913555536a38446dff0ad0256c5a.bindPopup(popup_2a1b856fb91ce4eb02a271c37c5f10d1)
+        ;
+
+        
+    
+    
+            circle_marker_ef26913555536a38446dff0ad0256c5a.bindTooltip(
+                `<div>
+                     Atlantique — Risque J+7 : 37.7%
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_87b3c5c79e38fe081cae0e98b8e86d71 = L.circleMarker(
+                [9.33716, 2.63031],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#e74c3c", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 20.0, "stroke": true, "weight": 1.5}
+            ).addTo(map_d96ee4bd4b2d7f2da4cd712e222fb9d4);
+        
+    
+        var popup_90a65aabcdfdb9f8837cb2223789c0fa = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_0d6dc9a6ecdbdeaa924339980d25a9f0 = $(`<div id="html_0d6dc9a6ecdbdeaa924339980d25a9f0" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:220px;">         <b style="font-size:15px;color:#1f2937;">Borgou</b><br>         <span style="font-size:10px;color:#9ca3af;">BN10</span>         <hr style="margin:6px 0;border-color:#e5e7eb;">         <b style="color:#e74c3c;font-size:13px;">Risque High</b><br>         <div style="margin-top:6px;color:#6b7280;font-size:12px;">             <b>25</b> evenements analyses<br>             Probabilite conflit J+7 : <b style="color:#e74c3c;">73.0%</b>         </div>     </div>     </div>`)[0];
+                popup_90a65aabcdfdb9f8837cb2223789c0fa.setContent(html_0d6dc9a6ecdbdeaa924339980d25a9f0);
+            
+        
+
+        circle_marker_87b3c5c79e38fe081cae0e98b8e86d71.bindPopup(popup_90a65aabcdfdb9f8837cb2223789c0fa)
+        ;
+
+        
+    
+    
+            circle_marker_87b3c5c79e38fe081cae0e98b8e86d71.bindTooltip(
+                `<div>
+                     Borgou — Risque J+7 : 73.0%
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_8cb70e7b803a004c60648c3d44fe89df = L.circleMarker(
+                [7.08333, 1.83333],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#27ae60", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(map_d96ee4bd4b2d7f2da4cd712e222fb9d4);
+        
+    
+        var popup_ddcbf32c8ff9100c97c516c1475d1385 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_d534e58cbdaa52bcfb6be293fdeb5a7c = $(`<div id="html_d534e58cbdaa52bcfb6be293fdeb5a7c" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:220px;">         <b style="font-size:15px;color:#1f2937;">Kouffo</b><br>         <span style="font-size:10px;color:#9ca3af;">BN12</span>         <hr style="margin:6px 0;border-color:#e5e7eb;">         <b style="color:#27ae60;font-size:13px;">Risque Low</b><br>         <div style="margin-top:6px;color:#6b7280;font-size:12px;">             <b>4</b> evenements analyses<br>             Probabilite conflit J+7 : <b style="color:#27ae60;">9.3%</b>         </div>     </div>     </div>`)[0];
+                popup_ddcbf32c8ff9100c97c516c1475d1385.setContent(html_d534e58cbdaa52bcfb6be293fdeb5a7c);
+            
+        
+
+        circle_marker_8cb70e7b803a004c60648c3d44fe89df.bindPopup(popup_ddcbf32c8ff9100c97c516c1475d1385)
+        ;
+
+        
+    
+    
+            circle_marker_8cb70e7b803a004c60648c3d44fe89df.bindTooltip(
+                `<div>
+                     Kouffo — Risque J+7 : 9.3%
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_94ed76f330ea772d10ed2de80104da67 = L.circleMarker(
+                [9.70853, 1.66598],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#27ae60", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(map_d96ee4bd4b2d7f2da4cd712e222fb9d4);
+        
+    
+        var popup_bd149fbb0af939cbe50d62522518eddb = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_3f1f7cdc826e392e96e3883e76657285 = $(`<div id="html_3f1f7cdc826e392e96e3883e76657285" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:220px;">         <b style="font-size:15px;color:#1f2937;">Donga</b><br>         <span style="font-size:10px;color:#9ca3af;">BN13</span>         <hr style="margin:6px 0;border-color:#e5e7eb;">         <b style="color:#27ae60;font-size:13px;">Risque Low</b><br>         <div style="margin-top:6px;color:#6b7280;font-size:12px;">             <b>3</b> evenements analyses<br>             Probabilite conflit J+7 : <b style="color:#27ae60;">32.6%</b>         </div>     </div>     </div>`)[0];
+                popup_bd149fbb0af939cbe50d62522518eddb.setContent(html_3f1f7cdc826e392e96e3883e76657285);
+            
+        
+
+        circle_marker_94ed76f330ea772d10ed2de80104da67.bindPopup(popup_bd149fbb0af939cbe50d62522518eddb)
+        ;
+
+        
+    
+    
+            circle_marker_94ed76f330ea772d10ed2de80104da67.bindTooltip(
+                `<div>
+                     Donga — Risque J+7 : 32.6%
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_356a2a0129ca04ad388eb6aaaa7c3143 = L.circleMarker(
+                [6.48333, 2.61667],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#f39c12", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 40, "stroke": true, "weight": 1.5}
+            ).addTo(map_d96ee4bd4b2d7f2da4cd712e222fb9d4);
+        
+    
+        var popup_0b45f491588ffb3e1902e9d7c23efa77 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_cf7abedeb0be96c3504f3e20546ced45 = $(`<div id="html_cf7abedeb0be96c3504f3e20546ced45" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:220px;">         <b style="font-size:15px;color:#1f2937;">Oueme (Porto-Novo)</b><br>         <span style="font-size:10px;color:#9ca3af;">BN16</span>         <hr style="margin:6px 0;border-color:#e5e7eb;">         <b style="color:#f39c12;font-size:13px;">Risque Medium</b><br>         <div style="margin-top:6px;color:#6b7280;font-size:12px;">             <b>98</b> evenements analyses<br>             Probabilite conflit J+7 : <b style="color:#f39c12;">57.4%</b>         </div>     </div>     </div>`)[0];
+                popup_0b45f491588ffb3e1902e9d7c23efa77.setContent(html_cf7abedeb0be96c3504f3e20546ced45);
+            
+        
+
+        circle_marker_356a2a0129ca04ad388eb6aaaa7c3143.bindPopup(popup_0b45f491588ffb3e1902e9d7c23efa77)
+        ;
+
+        
+    
+    
+            circle_marker_356a2a0129ca04ad388eb6aaaa7c3143.bindTooltip(
+                `<div>
+                     Oueme (Porto-Novo) — Risque J+7 : 57.4%
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5aa67eba7874277d73bc6cbed8b2a403 = L.circleMarker(
+                [7.18286, 1.99119],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#27ae60", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(map_d96ee4bd4b2d7f2da4cd712e222fb9d4);
+        
+    
+        var popup_fe402854e9f9757ac65e6b4d05345540 = L.popup({
+  "maxWidth": 260,
+});
+
+        
+            
+                var html_c8ca7dd93180b67dd236e6f9e66afff0 = $(`<div id="html_c8ca7dd93180b67dd236e6f9e66afff0" style="width: 100.0%; height: 100.0%;">     <div style="font-family:Inter,sans-serif;min-width:220px;">         <b style="font-size:15px;color:#1f2937;">Zou</b><br>         <span style="font-size:10px;color:#9ca3af;">BN18</span>         <hr style="margin:6px 0;border-color:#e5e7eb;">         <b style="color:#27ae60;font-size:13px;">Risque Low</b><br>         <div style="margin-top:6px;color:#6b7280;font-size:12px;">             <b>4</b> evenements analyses<br>             Probabilite conflit J+7 : <b style="color:#27ae60;">32.7%</b>         </div>     </div>     </div>`)[0];
+                popup_fe402854e9f9757ac65e6b4d05345540.setContent(html_c8ca7dd93180b67dd236e6f9e66afff0);
+            
+        
+
+        circle_marker_5aa67eba7874277d73bc6cbed8b2a403.bindPopup(popup_fe402854e9f9757ac65e6b4d05345540)
+        ;
+
+        
+    
+    
+            circle_marker_5aa67eba7874277d73bc6cbed8b2a403.bindTooltip(
+                `<div>
+                     Zou — Risque J+7 : 32.7%
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+</script>
+</html>
