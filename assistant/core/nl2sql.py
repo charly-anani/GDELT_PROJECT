@@ -31,8 +31,13 @@ class NL2SQLException(Exception):
 
 MAX_DISPLAY_ROWS = 500
 MAX_RETRIES = 1                    # ← NOUVEAU v2 : 1 retry après auto-correction
-bq_runner = BigQueryRunner()
+_bq_runner = None  # Variable globale, non initialisée
 
+def get_bq_runner() -> BigQueryRunner:
+    global _bq_runner
+    if _bq_runner is None:
+        _bq_runner = BigQueryRunner()  # Créé au PREMIER APPEL, pas à l'import
+    return _bq_runner
 _AUTHORIZED_JOIN_KEY = "GLOBALEVENTID"
 
 _HALLUCINATED_COLUMNS = [
@@ -304,7 +309,7 @@ def process_user_question(user_question: str) -> Dict[str, Any]:
         )
 
     try:
-        df, meta = bq_runner.run_query(sql)
+        df, meta = get_bq_runner().run_query(sql)
     except Exception as e:
         log_interaction(
             user_question=user_question,
