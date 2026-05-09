@@ -4,8 +4,22 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from pathlib import Path
 import traceback
+import os
+import base64
 from assistant.core.nl2sql import process_user_question
 from assistant.core.explainer import get_data_insights
+
+# Load GCP credentials from environment variable (Render compatibility)
+if 'GOOGLE_CREDENTIALS_B64' in os.environ and not os.environ.get('GOOGLE_APPLICATION_CREDENTIALS'):
+    try:
+        creds = base64.b64decode(os.environ['GOOGLE_CREDENTIALS_B64'])
+        creds_path = '/tmp/credentials.json'
+        with open(creds_path, 'wb') as f:
+            f.write(creds)
+        os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = creds_path
+        print("Loaded GCP credentials from GOOGLE_CREDENTIALS_B64")
+    except Exception as e:
+        print("Error loading GOOGLE_CREDENTIALS_B64:", e)
 
 app = FastAPI(title="GDELT Bénin Assistant API", version="2.0")
 
