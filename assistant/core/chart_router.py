@@ -7,15 +7,10 @@ import pandas as pd
 import plotly.express as px
 from folium.plugins import HeatMap
 
-from assistant.core.chart_style import (
-    PALETTE,
-    apply_plotly_style,
-    normalize_date_column,
-)
-
-COLOR_COOP = PALETTE["secondary"]
-COLOR_CONF = PALETTE["primary"]
-COLOR_NEUTRAL = PALETTE["neutral"]
+# Couleurs de style (anciennement dans chart_style.py)
+COLOR_COOP = "#10b981"      # Coopération - vert
+COLOR_CONF = "#ef4444"      # Conflit - rouge
+COLOR_NEUTRAL = "#6b7280"   # Neutre - gris
 
 BENIN_CENTER = [9.3, 2.3]
 BENIN_CENTROID_LAT = 9.5
@@ -372,9 +367,10 @@ def build_chart(df: pd.DataFrame, chart_plan: Dict[str, Any]) -> Any:
                 df,
                 x=x,
                 y=y,
-                color_discrete_sequence=[PALETTE["primary"]],
+                color_discrete_sequence=[COLOR_CONF],
             )
-            return apply_plotly_style(fig, title=title or f"{y} par {x}")
+            fig.update_layout(title=title or f"{y} par {x}")
+            return fig
         return None
 
     if chart_type == "line":
@@ -382,7 +378,6 @@ def build_chart(df: pd.DataFrame, chart_plan: Dict[str, Any]) -> Any:
         y = chart_plan.get("y")
         if x and y and x in df.columns and y in df.columns:
             df_plot = df.copy()
-            df_plot[x] = normalize_date_column(df_plot, x)
             df_plot = df_plot.sort_values(x)
 
             fig = px.line(
@@ -390,9 +385,10 @@ def build_chart(df: pd.DataFrame, chart_plan: Dict[str, Any]) -> Any:
                 x=x,
                 y=y,
                 markers=True,
-                color_discrete_sequence=[PALETTE["primary"]],
+                color_discrete_sequence=[COLOR_CONF],
             )
-            return apply_plotly_style(fig, title=title or f"{y} selon {x}")
+            fig.update_layout(title=title or f"{y} selon {x}")
+            return fig
         return None
 
     if chart_type == "pie":
@@ -405,17 +401,15 @@ def build_chart(df: pd.DataFrame, chart_plan: Dict[str, Any]) -> Any:
                 values=value,
                 hole=0.4,
                 color_discrete_sequence=[
-                    PALETTE["primary"],
-                    PALETTE["secondary"],
-                    PALETTE["neutral"],
+                    COLOR_CONF,
+                    COLOR_COOP,
+                    COLOR_NEUTRAL,
                     "#ff6b35",
                     "#6b7280",
                 ],
             )
-            return apply_plotly_style(
-                fig,
-                title=title or f"Répartition de {value} par {category}",
-            )
+            fig.update_layout(title=title or f"Répartition de {value} par {category}")
+            return fig
         return None
 
     if chart_type == "map":

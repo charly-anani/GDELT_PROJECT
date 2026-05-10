@@ -1,0 +1,1 @@
+> Les requêtes SQL ayant servi à construire l'ensemble de données `benin_2025` — utilisé dans l'ensemble du projet — sont disponibles et consultables dans la section **Requêtes** de l'éditeur BigQuery, sous le projet `gdelt-494812`. L'accès au projet a été accordé au compte `formations@isheero.com`.

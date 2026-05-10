@@ -11,20 +11,22 @@ pip install -r requirements.txt
 gcloud auth application-default login
 ```
 
-### 🔑 Clé API Groq (OBLIGATOIRE)
+###  Clé API Groq (OBLIGATOIRE)
 
 L'assistant utilise **Groq** comme LLM. Sans clé API, **rien ne fonctionnera**.
 
-1. Aller sur 👉 [https://console.groq.com/keys](https://console.groq.com/keys)
+1. Aller sur  [https://console.groq.com/keys](https://console.groq.com/keys)
 2. Créer un compte gratuit (ou se connecter)
 3. Cliquer sur **"Create API Key"**
 4. Copier la clé générée
 
-> ⚠️ **Limite gratuite** : 10 000 tokens par jour. Au-delà, les requêtes seront rejetées jusqu'au lendemain.
+> **Limite gratuite** : 10 000 tokens par jour. Au-delà, les requêtes seront rejetées jusqu'au lendemain.
 
 ### Créer le fichier `.env`
 
 Coller votre clé à la place de `coller_votre_clé_ici` :
+
+Executer cette commande
 
 ```bash
 cat > .env << 'EOF'
@@ -34,7 +36,7 @@ LLM_TEMPERATURE=0.3
 EOF
 ```
 
-✅ **Vérification** : ouvrir le fichier `.env` et s'assurer que la ligne `GROQ_API_KEY=gsk_...` contient bien votre clé (elle commence généralement par `gsk_`).
+ **Vérification** : ouvrir le fichier `.env` et s'assurer que la ligne `GROQ_API_KEY=gsk_...` contient bien votre clé (elle commence généralement par `gsk_`).
 
 ---
 
@@ -55,7 +57,7 @@ open http://localhost:8000
 # (L'API sert l'interface HTML - ne pas ouvrir le fichier directement !)
 ```
 
-### ⚙️ API REST uniquement (pour développeurs)
+### ⚙️ API REST uniquement
 
 ```bash
 uvicorn api:app --reload
@@ -63,13 +65,18 @@ uvicorn api:app --reload
 
  Documentation: http://localhost:8000/docs
 
-###  Mode Ligne de Commande
+###  Mode Ligne de Commande pour poser directement des auestions a la racine du projet 
 
 ```bash
-python -c "from assistant.core.nl2sql import process_user_question; response = process_user_question('Combien d\'événements en 2025 ?'); print(response['user_message'])"
+time python -c "
+from assistant.core.nl2sql import process_user_question
+print(process_user_question(\"Quelles personnes sont les plus citées dans les articles liés aux événements les plus couverts par les médias au Bénin en 2025 "))
+"
 ```
 
-Affiche directement: `31504 événements`
+Affiche directement: un json de resulats
+
+Note : Si un avertissement UserWarning de Google Cloud SDK s'affiche lors de l'exécution de cette commande, vous pouvez l'ignorer sans crainte — il n'affecte pas le résultat.
 
 ---
 
@@ -95,18 +102,13 @@ api.py (racine)            ← API REST entry point
 ## Exemples Questions
 
 ```
-"Combien d'événements en 2025 ?"
-→ Retourne: 31,504
+Quelle est la tonalité moyenne des articles au Bénin en 2025 ?
 
-"Top 5 médias"
-→ Retourne: Table punchng.com, dailypost.ng, ...
 
-"Évolution mensuelle tonalité"
-→ Retourne: Graphique ligne
+Quels événements ont reçu le plus de couverture médiatique au Bénin en 2025 ?
 
-"Où conflits ?"
-→ Retourne: Carte Folium
-```
+
+
 
 ---
 
@@ -118,7 +120,6 @@ api.py (racine)            ← API REST entry point
 | HTML refuse de se connecter | S'assurer que l'API est lancée (Terminal 1) |
 | `ModuleNotFoundError: groq` | `pip install groq` |
 | BigQuery auth | `gcloud auth application-default login` |
-| Column not found | Vérifier `metadata/column_dictionary.py` |
 | Erreur Groq / clé invalide | Vérifier la clé dans `.env` — en obtenir une sur [https://console.groq.com/keys](https://console.groq.com/keys) |
 | Requêtes rejetées par Groq | Limite de 10 000 tokens/jour atteinte — réessayer demain |
 
@@ -129,9 +130,7 @@ api.py (racine)            ← API REST entry point
 - **LLM** : Groq llama-3.3-70b (température 0.3)
 - **Clé API** : Gratuite sur [https://console.groq.com/keys](https://console.groq.com/keys) — limite 10 000 tokens/jour
 - **Validation** : Auto-correction SQL intégrée
-- **BigQuery** : 3 tables (events, mentions, gkg)
-- **Jointures** : GLOBALEVENTID uniquement
-- **Logger** : Enregistrement optionnel des interactions
+
 
 ---
 
