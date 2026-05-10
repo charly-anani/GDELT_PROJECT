@@ -12,5 +12,3 @@ db-dtypes>=1.2.0
 # LLM
 groq>=0.4.2
 
-# Optional (remove from production if not needed)
-# plotly>=5.22.0

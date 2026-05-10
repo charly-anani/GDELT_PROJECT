@@ -1,19 +1,19 @@
-#  GDELT Assistant — Documentation Complète
+# GDELT Assistant — Documentation Complète
 
-##  Table des matières
+## Table des matières
 
-1. [Vue d'ensemble](#-vue-densemble)
-2. [Installation](#-installation)
-3. [Démarrage rapide](#-démarrage-rapide)
-4. [Architecture](#-architecture)
-5. [Mode Console Testing](#-mode-console-testing)
-6. [API & Intégration](#-api--intégration)
-7. [Logs & Monitoring](#-logs--monitoring)
-8. [Dépannage](#-dépannage)
+1. [Vue d'ensemble](#vue-densemble)
+2. [Installation](#installation)
+3. [Démarrage rapide](#démarrage-rapide)
+4. [Architecture](#architecture)
+5. [Mode Console Testing](#mode-console-testing)
+6. [API & Intégration](#api--intégration)
+7. [Logs & Monitoring](#logs--monitoring)
+8. [Dépannage](#dépannage)
 
 ---
 
-##  Vue d'ensemble
+## Vue d'ensemble
 
 **GDELT Assistant** transforme des questions en langage naturel en requêtes SQL/BigQuery pour analyser les données GDELT du Bénin (2025).
 
@@ -34,7 +34,7 @@ Réponse structurée JSON
 
 ---
 
-##  Installation
+## Installation
 
 ### Prérequis
 - Python 3.10+
@@ -52,10 +52,26 @@ pip install -r requirements_assistant.txt
 
 # 3. Configuration Google Cloud
 gcloud auth application-default login
+```
 
-# 4. Créer .env à la racine du projet (parent)
+### Clé API Groq (OBLIGATOIRE)
+
+L'assistant utilise **Groq** comme LLM. Sans clé API, **rien ne fonctionnera**.
+
+1. Aller sur https://console.groq.com/keys
+2. Créer un compte gratuit (ou se connecter)
+3. Cliquer sur **"Create API Key"**
+4. Copier la clé générée
+
+> **Limite gratuite** : 10 000 tokens par jour. Au-delà, les requêtes seront rejetées jusqu'au lendemain.
+
+### Créer le fichier `.env`
+
+Coller votre clé à la place de `coller_votre_clé_ici` :
+
+```bash
 cat > ../.env << 'EOF'
-GROQ_API_KEY=votre_clé_groq
+GROQ_API_KEY=coller_votre_clé_ici
 GROQ_MODEL=llama-3.3-70b-versatile
 LLM_TEMPERATURE=0.3
 GROQ_MAX_TOKENS=700
@@ -63,9 +79,11 @@ GROQ_TOP_P=0.9
 EOF
 ```
 
+**Vérification** : ouvrir le fichier `.env` et s'assurer que la ligne `GROQ_API_KEY=gsk_...` contient bien votre clé (elle commence généralement par `gsk_`).
+
 ---
 
-##  Démarrage rapide
+## Démarrage rapide
 
 ### Mode 1: Interface Web HTML + API
 ```bash
@@ -96,28 +114,28 @@ python -c "from assistant.core.nl2sql import process_user_question; import json;
 
 ---
 
-##  Architecture
+## Architecture
 
 ### Structure du dossier
 ```
 assistant/
- core/                   # Moteur principal
-    nl2sql.py           # Orchestration (NL→SQL)
-    llm_client.py       # Client Groq
-    sql_validator.py    # Validation & auto-correction
-    bigquery_runner.py  # Exécution BigQuery
-    response_builder.py # Construction réponses
-    explainer.py        # Explication des résultats
-    logger.py           # Enregistrement interactions (optionnel)
-    config.py           # Configuration
- metadata/
-    column_dictionary.py    # Schéma (500+ colonnes)
-    schema_retriever.py     # Extraction contexte
- prompts/
-    system_prompt.py    # Instructions LLM
- ui/
-    gdelt-assistant_v2.html # Interface Web HTML/JavaScript
- README.md               # Ce fichier
+├── core/                   # Moteur principal
+│   ├── nl2sql.py           # Orchestration (NL→SQL)
+│   ├── llm_client.py       # Client Groq
+│   ├── sql_validator.py    # Validation & auto-correction
+│   ├── bigquery_runner.py  # Exécution BigQuery
+│   ├── response_builder.py # Construction réponses
+│   ├── explainer.py        # Explication des résultats
+│   ├── logger.py           # Enregistrement interactions (optionnel)
+│   └── config.py           # Configuration
+├── metadata/
+│   ├── column_dictionary.py    # Schéma (500+ colonnes)
+│   └── schema_retriever.py     # Extraction contexte
+├── prompts/
+│   └── system_prompt.py    # Instructions LLM
+├── ui/
+│   └── gdelt-assistant_v2.html # Interface Web HTML/JavaScript
+└── README.md               # Ce fichier
 ```
 
 ### Flux d'exécution détaillé
@@ -148,7 +166,7 @@ assistant/
 
 ---
 
-##  Mode Ligne de Commande
+## Mode Ligne de Commande
 
 Testez directement sans UI avec Python:
 
@@ -193,7 +211,7 @@ EOF
 
 ---
 
-##  API & Intégration
+## API & Intégration
 
 Fichier: `../api.py`
 
@@ -242,22 +260,22 @@ Health check endpoint
 
 ---
 
-##  Monitoring
+## Monitoring
 
 Le système enregistre les interactions mais le dossier logs/ a été supprimé.
 Pour activer l'enregistrement, il suffit de créer le dossier `logs/` manuellement.
 
 ---
 
-##  Validation SQL
+## Validation SQL
 
 Le système valide automatiquement :
 
- **Colonnes valides** (vérifiées vs column_dictionary.py)
- **Jointures autorisées** (events ↔ mentions via GLOBALEVENTID)
- **Auto-correction** (mauvaise syntaxe → corrigée)
- **Injections SQL** (bloquées)
- **Hallucinations LLM** (colonnes inexistantes → détectées)
+- **Colonnes valides** (vérifiées vs column_dictionary.py)
+- **Jointures autorisées** (events <-> mentions via GLOBALEVENTID)
+- **Auto-correction** (mauvaise syntaxe -> corrigée)
+- **Injections SQL** (bloquées)
+- **Hallucinations LLM** (colonnes inexistantes -> détectées)
 
 ### Exemple
 
@@ -273,7 +291,7 @@ SELECT Actor1Name FROM events_clean  --  Auto-corrigé
 
 ---
 
-##  Intelligence LLM
+## Intelligence LLM
 
 **Modèle:** Groq `llama-3.3-70b-versatile`
 
@@ -281,6 +299,8 @@ SELECT Actor1Name FROM events_clean  --  Auto-corrigé
 - Température: 0.3 (déterministe)
 - Max tokens: 700
 - Top-P: 0.9
+
+**Clé API:** Gratuite sur https://console.groq.com/keys — limite 10 000 tokens/jour
 
 **Prompt système inclut:**
 - Noms colonnes exacts (snake_case vs CamelCase)
@@ -290,7 +310,7 @@ SELECT Actor1Name FROM events_clean  --  Auto-corrigé
 
 ---
 
-##  Types de Réponses
+## Types de Réponses
 
 ### KPI (Nombre simple)
 ```json
@@ -317,7 +337,7 @@ SELECT Actor1Name FROM events_clean  --  Auto-corrigé
 ```json
 {
   "status": "success",
-  "chart": <Plotly Figure object>
+  "chart": "<Plotly Figure object>"
 }
 ```
 
@@ -342,7 +362,7 @@ SELECT Actor1Name FROM events_clean  --  Auto-corrigé
 
 ---
 
-##  Dépannage
+## Dépannage
 
 ### Erreur: "No module named 'groq'"
 ```bash
@@ -358,6 +378,11 @@ gcloud auth application-default login
 Vérifier `metadata/column_dictionary.py`
 - La colonne existe peut-être sous un autre nom
 - Voir les "synonyms" dans le dictionnaire
+
+### Erreur: Groq clé invalide ou requêtes rejetées
+- Vérifier que la clé est bien présente dans `.env`
+- En obtenir une nouvelle sur https://console.groq.com/keys
+- Si limite atteinte (10 000 tokens/jour) -> réessayer demain
 
 ### Erreur: "Timeout" sur Streamlit
 ```bash
@@ -378,7 +403,7 @@ print(f'Tables: {BQ_TABLES}')
 
 ---
 
-##  Fichiers Clés
+## Fichiers Clés
 
 | Fichier | Rôle | Ligne d'entrée |
 |---------|------|---|
@@ -392,11 +417,12 @@ print(f'Tables: {BQ_TABLES}')
 
 ---
 
-##  Checklist Démarrage
+## Checklist Démarrage
 
 - [ ] Virtual env activé
 - [ ] requirements_assistant.txt installé
-- [ ] .env configuré (GROQ_API_KEY)
+- [ ] Clé API Groq obtenue sur https://console.groq.com/keys
+- [ ] .env configuré (GROQ_API_KEY=gsk_...)
 - [ ] `gcloud auth application-default login`
 - [ ] Tester: `python -c "from assistant.core.nl2sql import process_user_question; print(process_user_question('Combien d\'événements ?')['user_message'])"`
 - [ ] Streamlit: `streamlit run app.py`
@@ -404,7 +430,7 @@ print(f'Tables: {BQ_TABLES}')
 
 ---
 
-##  Points d'entrée
+## Points d'entrée
 
 | Mode | Port | Commande |
 |------|------|----------|
@@ -415,4 +441,4 @@ print(f'Tables: {BQ_TABLES}')
 ---
 
 **Version:** 2.0 (NL2SQL + Auto-correction)
-**Dernière mise à jour:** 9 mai 2026
+**Dernière mise à jour:** 10 mai 2026
