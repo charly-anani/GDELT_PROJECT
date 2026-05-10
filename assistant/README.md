@@ -27,9 +27,9 @@ Validation & Auto-correction SQL
     ↓
 Exécution BigQuery
     ↓
-Construction visualisation (graphiques/tables)
+Construction de la réponse JSON
     ↓
-Réponse structurée JSON
+Réponse structurée (données + métadonnées)
 ```
 
 ---
@@ -48,7 +48,7 @@ Réponse structurée JSON
 source ../.venv/bin/activate
 
 # 2. Installer dépendances
-pip install -r requirements_assistant.txt
+pip install -r ../requirements.txt
 
 # 3. Configuration Google Cloud
 gcloud auth application-default login
@@ -172,42 +172,18 @@ Testez directement sans UI avec Python:
 
 ### Exemple simple
 ```bash
-cd ..
-python -c "from assistant.core.nl2sql import process_user_question; response = process_user_question('Combien d\'événements en 2025 ?'); print(response['user_message'])"
-```
-Affiche: `31504 événements`
-
-### Exemple avec réponse complète (JSON)
-```bash
-cd ..
-python -c "from assistant.core.nl2sql import process_user_question; import json; response = process_user_question('Combien d\'événements en 2025 ?'); print(json.dumps(response, indent=2, default=str))"
-```
-
-### Exemple avec boucle interactive
-```bash
-cd ..
-python << 'EOF'
+time python -c "
 from assistant.core.nl2sql import process_user_question
-
-questions = [
-    "Combien d'événements en 2025 ?",
-    "Quels sont les top 5 médias ?",
-    "Quelle est l'évolution mensuelle de la tonalité ?"
-]
-
-for q in questions:
-    print(f"\nQuestion: {q}")
-    response = process_user_question(q)
-    print(f"Réponse: {response['user_message']}")
-EOF
+print(process_user_question(\"Quels événements ont reçu le plus de couverture médiatique au Bénin en 2025 ?\"))
+"
 ```
 
 ### Questions à essayer
 - "Combien d'événements en 2025 ?"
 - "Quels sont les top 10 médias ?"
 - "Quelle est l'évolution mensuelle de la tonalité ?"
-- "Où se concentrent les conflits ?"
-- "Quelles personnes sont les plus citées dans les articles liés aux événements les plus couverts par les médias au Bénin en 2025 ?"
+- "Quels sont les types d'événements les plus fréquents au Bénin en 2025 ?"
+
 
 ---
 
@@ -260,34 +236,10 @@ Health check endpoint
 
 ---
 
-## Monitoring
-
-Le système enregistre les interactions mais le dossier logs/ a été supprimé.
-Pour activer l'enregistrement, il suffit de créer le dossier `logs/` manuellement.
 
 ---
 
-## Validation SQL
 
-Le système valide automatiquement :
-
-- **Colonnes valides** (vérifiées vs column_dictionary.py)
-- **Jointures autorisées** (events <-> mentions via GLOBALEVENTID)
-- **Auto-correction** (mauvaise syntaxe -> corrigée)
-- **Injections SQL** (bloquées)
-- **Hallucinations LLM** (colonnes inexistantes -> détectées)
-
-### Exemple
-
-**Généré par LLM:**
-```sql
-SELECT actor_id FROM events_clean  --  actor_id n'existe pas
-```
-
-**Après validation:**
-```sql
-SELECT Actor1Name FROM events_clean  --  Auto-corrigé
-```
 
 ---
 
@@ -333,33 +285,6 @@ SELECT Actor1Name FROM events_clean  --  Auto-corrigé
 }
 ```
 
-### Graphique (Plotly/Folium)
-```json
-{
-  "status": "success",
-  "chart": "<Plotly Figure object>"
-}
-```
-
-### Erreur SQL
-```json
-{
-  "status": "sql_error",
-  "user_message": "Requête invalide",
-  "message": "Colonne inexistante",
-  "details": "actor_id not found in events_clean"
-}
-```
-
-### Clarification nécessaire
-```json
-{
-  "status": "clarification_required",
-  "message": "La question est ambiguë",
-  "options": [...]
-}
-```
-
 ---
 
 ## Dépannage
@@ -374,19 +299,18 @@ pip install groq
 gcloud auth application-default login
 ```
 
-### Erreur: "Column XXX not found"
-Vérifier `metadata/column_dictionary.py`
-- La colonne existe peut-être sous un autre nom
-- Voir les "synonyms" dans le dictionnaire
 
 ### Erreur: Groq clé invalide ou requêtes rejetées
 - Vérifier que la clé est bien présente dans `.env`
 - En obtenir une nouvelle sur https://console.groq.com/keys
 - Si limite atteinte (10 000 tokens/jour) -> réessayer demain
 
-### Erreur: "Timeout" sur Streamlit
+### Erreur: API ne démarre pas
 ```bash
-streamlit run app.py --client.toolbarMode=minimal --logger.level=error
+# Vérifier que le port 8000 est libre
+lsof -i :8000
+# Si occupé, tuer le processus ou utiliser un port différent
+uvicorn api:app --reload --port 8001
 ```
 
 ### Erreur: "Table mentions_clean not found"
@@ -420,13 +344,15 @@ print(f'Tables: {BQ_TABLES}')
 ## Checklist Démarrage
 
 - [ ] Virtual env activé
-- [ ] requirements_assistant.txt installé
+- [ ] requirements.txt installé
 - [ ] Clé API Groq obtenue sur https://console.groq.com/keys
 - [ ] .env configuré (GROQ_API_KEY=gsk_...)
 - [ ] `gcloud auth application-default login`
-- [ ] Tester: `python -c "from assistant.core.nl2sql import process_user_question; print(process_user_question('Combien d\'événements ?')['user_message'])"`
-- [ ] Streamlit: `streamlit run app.py`
-- [ ] API: `uvicorn ../api:app --reload`
+- [ ] Tester: `time python -c "
+from assistant.core.nl2sql import process_user_question
+print(process_user_question(\"Quels événements ont reçu le plus de couverture médiatique au Bénin en 2025 ?\"))
+"`
+- [ ] API: `uvicorn ../api:app --reload`    et aller sur le lien generalement http://localhost:8000/ sauf si port precis
 
 ---
 
@@ -434,11 +360,12 @@ print(f'Tables: {BQ_TABLES}')
 
 | Mode | Port | Commande |
 |------|------|----------|
-| Web UI | 8501 | `streamlit run app.py` |
-| API | 8000 | `uvicorn ../api:app --reload` |
-| Ligne de commande | - | `python -c "from assistant.core.nl2sql import process_user_question; ..."` |
+| Web UI (HTML) | 8000 | `uvicorn ../api:app --reload` |
+| API REST | 8000 | `uvicorn ../api:app --reload` |
+| Ligne de commande | - | `time python -c "
+from assistant.core.nl2sql import process_user_question
+print(process_user_question(\"Quels événements ont reçu le plus de couverture médiatique au Bénin en 2025 ?\"))
+"` |
 
 ---
 
-**Version:** 2.0 (NL2SQL + Auto-correction)
-**Dernière mise à jour:** 10 mai 2026
